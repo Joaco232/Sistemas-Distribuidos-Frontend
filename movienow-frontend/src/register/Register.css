@@ -1,0 +1,202 @@
+
+.register-page {
+    position: relative;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.register-page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+            linear-gradient(
+                    to bottom right,
+                    rgba(0, 0, 0, 0.80) 0%,
+                    rgba(0, 0, 0, 0.50) 10%,
+                    rgba(0, 0, 0, 0.40) 50%,
+                    rgba(255, 255, 255, 0.16) 100%
+            ),
+            url('../assets/images/Fondo.jpg');
+    background-size: auto;
+    background-repeat: repeat;
+    filter: blur(2px);
+    z-index: 0;
+}
+
+.register-page > * {
+    position: relative;
+    z-index: 1;
+}
+
+.register-header {
+
+    background-color: #09466c;
+    height: 60px;
+    padding: 10px;
+    display: flex;
+
+}
+
+.logo-header {
+
+    height: 40px;
+    margin: 0px;
+
+}
+
+.register-body {
+    padding: 0;
+    background-color: rgba(211, 196, 196, 0);
+    height: auto;
+    flex-grow: 1;
+    overflow-y: auto;
+    min-height: calc(100vh - 60px);
+
+
+}
+
+.form-container {
+
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+
+.register-title {
+
+    text-align: center;
+    color: white;
+    margin-bottom: 0px;
+    margin-top: 10px;
+    font-family: 'DM sans', sans-serif;
+    font-size: 26px;
+    font-weight: 400;
+}
+
+.logo-form {
+
+    height: 70px;
+    margin: 0 auto;
+}
+
+.register-slogan {
+
+    text-align: center;
+    color: #99aeda;
+    margin-bottom: 20px;
+    font-family: 'DM sans', sans-serif;
+    font-size: 20px;
+    font-weight: 200;
+    letter-spacing: 1.5px;
+
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    margin-left: 15px;
+    margin-right: 15px;
+
+    .group {
+        margin-top: 12px;
+
+    }
+
+}
+
+
+.text-input {
+
+    font-size: 18px;
+    font-weight: 200;
+    font-family: 'DM Sans', sans-serif;
+
+    .input {
+        font-family: 'DM Sans', sans-serif;
+        font-size: 18px;
+        font-weight: 200;
+
+    }
+
+    label {
+        min-width: 300px;
+        margin: 0 auto;
+        color: rgba(255, 255, 255, 0.68);
+        font-weight: 200;
+        color: rgba(255, 255, 255, 0.68);
+    }
+}
+
+
+.form-button {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+
+    position: relative;
+    width: 270px;
+    height: 55px;
+    padding: 10px 10px;
+    border-radius: 100vmax;
+    isolation: isolate;
+    background-color: rgba(0, 41, 248, 0.18);
+    color: rgb(255 255 255 / 90%);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.24);
+    font-size: 1.25rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.18), 0 0 20px rgba(0, 0, 0, 0.16);
+    text-align: center;
+    user-select: none;
+    cursor: grab;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+    }
+
+
+    &::before {
+    z-index: -1;
+    }
+
+
+    &::after {
+    box-shadow: inset 2px 2px 1px 0 rgba(136, 135, 135, 0.2), inset -1px -1px 1px 1px rgba(156, 149, 149, 0.19);
+    }
+
+    &.dragging {
+        cursor: grabbing;
+    }
+
+    &:hover {
+        background-color: rgba(0, 41, 248, 0.3);
+    }
+
+    &:active {
+        background-color: rgba(0, 41, 248, 0.35);
+        transform: scale(0.96);
+    }
+
+
+}
+
+
+
+
+
+.register-footer {
+    align-content: center;
+    height: 120px;
+    background-color: #084073;
+
+
+}
+
+

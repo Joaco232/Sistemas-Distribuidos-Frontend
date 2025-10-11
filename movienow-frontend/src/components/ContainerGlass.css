@@ -1,0 +1,38 @@
+.container-glass {
+    position: relative;
+    background-color: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(9px);
+    width: 450px;
+    margin: 50px auto;
+    padding: 30px 50px;
+    border-radius: 60px;
+    border: 0px solid transparent;
+    box-shadow: 0 0 35px rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.container-glass::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1.5px;
+    background: linear-gradient(
+            to bottom right,
+            rgba(255, 255, 255, 0.72) 0%,
+            rgba(126, 158, 247, 0.81) 30%,
+            rgba(26, 70, 141, 0.99) 100%
+    );
+    z-index: 0;
+    pointer-events: none;
+    mask:
+            linear-gradient(#fff 0 0) content-box,
+            linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+}
+
+
