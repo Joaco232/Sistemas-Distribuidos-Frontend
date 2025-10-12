@@ -6,6 +6,7 @@ import ContainerGlass from "../components/ContainerGlass.jsx";
 import InputField from "../components/InputField.jsx";
 import Header from "../components/Header.jsx";
 import ButtonGlass from "../components/ButtonGlass.jsx";
+import Footer from "../components/Footer.jsx";
 
 
 export default function Register() {
@@ -47,20 +48,7 @@ export default function Register() {
 
             </div>
 
-            <div className="register-footer">
-
-                <div className="register-footer-text">
-
-                    <button className="terms-conditions-use">Terminos y Condiciones de uso</button>
-                    <button className="feedback">Feedback</button>
-                    <button className="contact">Contacto</button>
-
-                </div>
-
-                <img className="logo-header" src={Imagotipo} alt="MovieNow logo"/>
-
-
-            </div>
+            <Footer className="register-footer"></Footer>
 
         </div>
     );

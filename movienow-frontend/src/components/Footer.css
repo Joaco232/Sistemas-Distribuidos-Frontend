@@ -1,0 +1,49 @@
+.footer-mn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 120px;
+    background: linear-gradient(to bottom,
+        #254a74,
+        #335883,
+        #5b7489);
+
+}
+
+.footer-text {
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 7px;
+
+}
+
+.footer-link {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+    margin-right: 5px;
+    margin-left: 5px;
+    opacity: 0.8;
+    font-weight: 400;
+
+    &:hover {
+        opacity: 1;
+        font-weight: 500;
+    }
+
+
+
+}
+
+
+
+.logo-footer {
+    height: 30px;
+    margin-top: 10px;
+
+}
