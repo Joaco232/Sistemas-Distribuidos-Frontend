@@ -4,6 +4,8 @@ import LogoB from "../assets/images/movienow-logo-w-m.png";
 import Imagotipo from "../assets/images/movienow-logo-w.png";
 import ContainerGlass from "../components/ContainerGlass.jsx";
 import InputField from "../components/InputField.jsx";
+import Header from "../components/Header.jsx";
+import ButtonGlass from "../components/ButtonGlass.jsx";
 
 
 export default function Register() {
@@ -12,13 +14,13 @@ export default function Register() {
 
         <div className="register-page">
 
-            <div className="register-header">
+            <Header className="register-header">
 
                 <img className="logo-header" src={LogoB} alt="MovieNow logo"/>
 
                 <button className="sign-in-button">Iniciar sesión</button>
 
-            </div>
+            </Header>
 
             <div className="register-body">
 
@@ -38,7 +40,7 @@ export default function Register() {
                         <InputField label="Contraseña" type="password" name="password" className="text-input" />
                         <InputField label="Repetir Contraseña" type="password" name="confirmPassword" className="text-input"/>
 
-                        <button type="submit" className="form-button" >Registrarse</button>
+                        <ButtonGlass type="submit" className="form-button" >Registrarse</ButtonGlass>
                     </form>
 
                 </ContainerGlass>

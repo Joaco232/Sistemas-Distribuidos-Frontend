@@ -1,10 +1,10 @@
 import React from "react";
 import "./ButtonGlass.css";
 
-export default function ButtonGlass({ children, className = "" }) {
+export default function ButtonGlass({ children, className = "", type = "button" }) {
     return (
-        <div className={`button-glass ${className}`}>
+        <button type={type} className={`button-glass ${className}`}>
             {children}
-        </div>
+        </button >
     );
 }

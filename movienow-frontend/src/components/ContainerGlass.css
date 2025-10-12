@@ -1,12 +1,9 @@
 .container-glass {
     position: relative;
     background-color: rgba(0, 0, 0, 0);
-    backdrop-filter: blur(9px);
-    width: 450px;
-    margin: 50px auto;
-    padding: 30px 50px;
+    backdrop-filter: blur(5px);
     border-radius: 60px;
-    border: 0px solid transparent;
+    border: 0 solid transparent;
     box-shadow: 0 0 35px rgba(0, 0, 0, 0.6);
     display: flex;
     flex-direction: column;
@@ -24,7 +21,7 @@
             to bottom right,
             rgba(255, 255, 255, 0.72) 0%,
             rgba(126, 158, 247, 0.81) 30%,
-            rgba(26, 70, 141, 0.99) 100%
+            rgb(26, 70, 141) 100%
     );
     z-index: 0;
     pointer-events: none;
