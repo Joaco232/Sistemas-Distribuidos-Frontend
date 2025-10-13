@@ -11,6 +11,7 @@ import {useState} from "react";
 import {registerUser} from "../services/apiUser.js";
 
 
+
 export default function Register() {
 
     const today = new Date().toISOString().split("T")[0];
@@ -107,8 +108,9 @@ export default function Register() {
                                     value={formData.name} type={"text"} onChange={handleChange}
                                     maxLength={50}/>
 
-                        <InputField label="Fecha de Nacimiento" name="birthDate" className="text-input "
-                                    value={formData.birthDate} type={"date"} onChange={handleChange} datepicker max={today}/>
+                        <InputField label="Fecha de Nacimiento" name="birthDate" className="text-input"
+                                    value={formData.birthDate} type="date" onChange={handleChange}
+                                    max={today} placeholder="" />
 
                         <InputField label="Email" type="text" name="email" className="text-input"
                                     value={formData.email} onChange={handleChange}
