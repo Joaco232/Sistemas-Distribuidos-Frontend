@@ -13,9 +13,11 @@ import {registerUser} from "../services/apiUser.js";
 
 export default function Register() {
 
+    const today = new Date().toISOString().split("T")[0];
+
     const [formData, setFormData] = useState({
         name: "",
-        surname: "",
+        birthDate: "",
         email: "",
         password1: "",
         password2: ""
@@ -24,7 +26,7 @@ export default function Register() {
     function handleChange(e) {
         const { name, value } = e.target;
 
-        if ((name === "name" || name === "surname") && !/^[\p{L}\s]*$/u.test(value)) {
+        if (name === "name" && !/^[\p{L}\s]*$/u.test(value)) {
             return;
         }
 
@@ -60,12 +62,19 @@ export default function Register() {
 
         try {
 
-            const response = await registerUser(formData);
-            
+            let userData = {
+                name: formData.name,
+                birthDate: formData.birthDate,
+                email: formData.email,
+                password: formData.password1
+            };
+            const response = await registerUser(userData);
+            console.log("Usuario registrado:", response);
+            setError("");
 
         } catch (error) {
 
-            setError("Error al registrar el usuario. Inténtelo de nuevo.");
+            setError(error.message);
         }
     }
 
@@ -94,13 +103,12 @@ export default function Register() {
 
                     <form className="register-form">
 
-                        <InputField label="Nombre" name="name" className="text-input"
+                        <InputField label="Nombre Completo" name="name" className="text-input"
                                     value={formData.name} type={"text"} onChange={handleChange}
                                     maxLength={50}/>
 
-                        <InputField label="Apellido" name="surname" className="text-input"
-                                    value={formData.surname} type={"text"} onChange={handleChange}
-                                    maxLength={50}/>
+                        <InputField label="Fecha de Nacimiento" name="birthDate" className="text-input "
+                                    value={formData.birthDate} type={"date"} onChange={handleChange} datepicker max={today}/>
 
                         <InputField label="Email" type="text" name="email" className="text-input"
                                     value={formData.email} onChange={handleChange}

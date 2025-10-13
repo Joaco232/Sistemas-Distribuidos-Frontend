@@ -9,7 +9,12 @@ export async function registerUser(userData) {
     });
 
     if (!response.ok) {
-        throw new Error("Error al registrar el usuario.");
+
+        const errorData = await response.json();
+
+        const message = errorData?.message || "Error desconocido al registrar el usuario.";
+
+        throw new Error(message);
     }
 
     return response.json();
