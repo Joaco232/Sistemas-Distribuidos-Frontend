@@ -85,8 +85,8 @@
 .form-container {
 
     width: 450px;
-    margin: 20px auto;
-    padding: 30px 50px;
+    margin: 15px auto;
+    padding: 27px 50px;
 }
 
 
@@ -95,7 +95,7 @@
     text-align: center;
     color: white;
     margin-bottom: 0px;
-    margin-top: 10px;
+    margin-top: 5px;
     font-family: 'DM sans', sans-serif;
     font-size: 26px;
     font-weight: 400;
@@ -155,11 +155,19 @@
     }
 }
 
+.error-text {
+    color: #ff6b6b;
+    text-align: center;
+    font-family: 'DM Sans', sans-serif;
+    margin-top: 3px;
+    font-size: 16px;
+}
+
 
 .form-button {
     margin-left: auto;
     margin-right: auto;
-    margin-top: 20px;
+    margin-top: 15px;
 
     position: relative;
     width: 270px;

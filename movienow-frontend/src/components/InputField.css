@@ -27,10 +27,12 @@ label {
     left: 5px;
     top: 10px;
     transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
 }
 
 .input:focus ~ label,
-.input:valid ~ label {
+.input:not(:placeholder-shown) ~ label {
     top: -14px;
     font-size: 14px;
     color: rgba(197, 202, 218, 0.76);
@@ -45,13 +47,15 @@ label {
 
 .bar:before,
 .bar:after {
-    content: "";
+    content: '';
     height: 2px;
     width: 0;
     bottom: 1px;
     position: absolute;
-    background: rgba(127, 159, 237, 0.91);
+    background: #5264AE;
     transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
 }
 
 .bar:before {

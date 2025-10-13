@@ -7,9 +7,68 @@ import InputField from "../components/InputField.jsx";
 import Header from "../components/Header.jsx";
 import ButtonGlass from "../components/ButtonGlass.jsx";
 import Footer from "../components/Footer.jsx";
+import {useState} from "react";
+import {registerUser} from "../services/apiUser.js";
 
 
 export default function Register() {
+
+    const [formData, setFormData] = useState({
+        name: "",
+        surname: "",
+        email: "",
+        password1: "",
+        password2: ""
+    });
+
+    function handleChange(e) {
+        const { name, value } = e.target;
+
+        if ((name === "name" || name === "surname") && !/^[\p{L}\s]*$/u.test(value)) {
+            return;
+        }
+
+        setFormData(prev => ({
+            ...prev,
+            [name]: value
+        }));
+    }
+
+    const [error, setError] = useState("");
+
+    async function handleSubmit(e) {
+
+        e.preventDefault();
+
+        if (Object.values(formData).some(value => value.trim() === "")) {
+
+            setError("Por favor, complete todos los campos.");
+            return;
+        }
+        if (!formData.email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)) {
+            setError("Por favor, ingrese un email válido.");
+            return;
+        }
+        if (formData.password1.length < 8 && !formData.password1.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=\[{\]};:'",<.>/?\\|`~]).{8,}$/)) {
+            setError("La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial.");
+            return;
+        }
+        if (formData.password1 !== formData.password2) {
+            setError("Las contraseñas no coinciden.");
+            return;
+        }
+
+        try {
+
+            const response = await registerUser(formData);
+            
+
+        } catch (error) {
+
+            setError("Error al registrar el usuario. Inténtelo de nuevo.");
+        }
+    }
+
 
     return (
 
@@ -23,7 +82,7 @@ export default function Register() {
 
             </Header>
 
-            <div className="register-body">
+            <div className="register-body" onSubmit={handleSubmit}>
 
                 <ContainerGlass className="form-container">
 
@@ -35,13 +94,30 @@ export default function Register() {
 
                     <form className="register-form">
 
-                        <InputField label="Nombre" name="nombre" className="text-input" />
-                        <InputField label="Apellido" name="apellido" className="text-input" />
-                        <InputField label="Email" type="email" name="email" className="text-input"/>
-                        <InputField label="Contraseña" type="password" name="password" className="text-input" />
-                        <InputField label="Repetir Contraseña" type="password" name="confirmPassword" className="text-input"/>
+                        <InputField label="Nombre" name="name" className="text-input"
+                                    value={formData.name} type={"text"} onChange={handleChange}
+                                    maxLength={50}/>
+
+                        <InputField label="Apellido" name="surname" className="text-input"
+                                    value={formData.surname} type={"text"} onChange={handleChange}
+                                    maxLength={50}/>
+
+                        <InputField label="Email" type="text" name="email" className="text-input"
+                                    value={formData.email} onChange={handleChange}
+                                    maxLength={254}/>
+
+                        <InputField label="Contraseña" type="password" name="password1" className="text-input"
+                                    value={formData.password1} onChange={handleChange}
+                                    maxLength={254}/>
+
+                        <InputField label="Repetir Contraseña" type="password" name="password2" className="text-input"
+                                    value={formData.password2} onChange={handleChange}
+                                    maxLength={254}/>
+
+                        {error && <p className="error-text">{error}</p>}
 
                         <ButtonGlass type="submit" className="form-button" >Registrarse</ButtonGlass>
+
                     </form>
 
                 </ContainerGlass>
