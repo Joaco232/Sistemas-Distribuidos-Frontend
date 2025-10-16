@@ -28,6 +28,7 @@
 .login-page > * {
     position: relative;
     z-index: 1;
+    
 }
 
 .logo-header {
@@ -79,7 +80,6 @@
     margin: 15px auto;
     padding: 27px 50px;
 }
-
 
 .login-title {
     text-align: center;
@@ -133,6 +133,7 @@
         margin: 0 auto;
         color: rgba(255, 255, 255, 0.68);
         font-weight: 200;
+        color: rgba(255, 255, 255, 0.68);
     }
 }
 
@@ -160,3 +161,20 @@
     font-weight: 500;
     font-size: 22px;
 }
+
+.remember-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+
+.remember-label {
+  font-size: 1.1rem;
+  font-family: 'DM Sans', sans-serif;
+  color: #ffffff;
+  margin-top: 20px;
+} 
+
+

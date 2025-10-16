@@ -1,15 +1,22 @@
+.cntr {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Caja del checkbox */
 .cbx {
   position: relative;
-  top: 1px;
+  display: block;
   width: 27px;
   height: 27px;
   border: 1px solid #c8ccd4;
   border-radius: 3px;
-  transition: background 0.1s ease;
+  transition: background 0.1s ease, border-color 0.1s ease;
   cursor: pointer;
-  display: block;
 }
 
+/* Palomita */
 .cbx:after {
   content: '';
   position: absolute;
@@ -25,51 +32,49 @@
   transition-delay: 0.15s;
 }
 
-#cbx:checked ~ .cbx {
+/* Cuando el input está marcado */
+.hidden-xs-up:checked + .cbx {
   border-color: transparent;
-  background: #6871f1;
+  background: rgba(0, 41, 248, 0.35)c;  /*evaluar ese efecto u otro.*/
   animation: jelly 0.6s ease;
 }
 
-#cbx:checked ~ .cbx:after {
+.hidden-xs-up:checked + .cbx:after {
   opacity: 1;
   transform: rotate(45deg) scale(1);
 }
 
-.cntr {
-  position: relative;
+/* Ocultamos el input, pero DEJAMOS que reciba clicks */
+.hidden-xs-up {
+  position: absolute;
+  opacity: 0;
+  width: 27px;
+  height: 27px;
+  margin: 0;
+  cursor: pointer;
 }
 
+/* Animación */
 @keyframes jelly {
   from {
     transform: scale(1, 1);
   }
-
   30% {
     transform: scale(1.25, 0.75);
   }
-
   40% {
     transform: scale(0.75, 1.25);
   }
-
   50% {
     transform: scale(1.15, 0.85);
   }
-
   65% {
     transform: scale(0.95, 1.05);
   }
-
   75% {
     transform: scale(1.05, 0.95);
   }
-
   to {
     transform: scale(1, 1);
   }
-}
-
-.hidden-xs-up {
-  display: none !important;
 }

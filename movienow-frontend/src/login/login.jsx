@@ -9,6 +9,7 @@ import ButtonGlass from "../components/ButtonGlass.jsx";
 import Footer from "../components/Footer.jsx";
 import {useState} from "react";
 import { useNavigate } from "react-router-dom";
+import RememberMeButton from "../components/RemeberMeButton/RememberMeButton.jsx"
 ;
 
 export default function Login() {
@@ -85,7 +86,7 @@ export default function Login() {
 
                     <img className="logo-form" src={Imagotipo} alt="MovieNow logo" />
 
-                    <p className="login-slogan">Donde ninguna película se nos escapa.</p>
+                    <p className="login-slogan">Ninguna película se nos escapa.</p>
 
                     <form className="login-form" onSubmit={handleSubmit}>
 
@@ -96,6 +97,17 @@ export default function Login() {
                         <InputField label="Contraseña" name="password" className="text-input"
                                     value={formData.password} type="password" onChange={handleChange}
                                     maxLength={254}/>
+
+                    <div className="remember-section">
+                        <RememberMeButton
+                        checked={formData.rememberMe}
+                        onChange={() =>
+                            setFormData((prev) => ({ ...prev, rememberMe: !prev.rememberMe }))
+                        }
+                        />
+                        <p className="remember-label">Recordarme</p>
+                    
+                    </div>
 
                         {error && <p className="error-text">{error}</p>}
 
