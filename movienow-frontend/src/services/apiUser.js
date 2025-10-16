@@ -19,3 +19,26 @@ export async function registerUser(userData) {
 
     return response.json();
 }
+
+
+export async function loginUser(userLogin) {
+    const response = await fetch(`${BACK_URL}/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userLogin),
+    });
+
+    if (!response.ok) {
+
+        const errorData = await response.json();
+
+        const message = errorData?.message || "Error desconocido al registrar el usuario.";
+
+        throw new Error(message);
+    }
+
+    return response.json();
+}
+
+
+
