@@ -86,7 +86,7 @@ export default function Login() {
 
                     <img className="logo-form" src={Imagotipo} alt="MovieNow logo" />
 
-                    <p className="login-slogan">Donde ninguna película se nos escapa.</p>
+                    <p className="login-slogan">Ninguna película se nos escapa.</p>
 
                     <form className="login-form" onSubmit={handleSubmit}>
 
@@ -105,8 +105,7 @@ export default function Login() {
                             setFormData((prev) => ({ ...prev, rememberMe: !prev.rememberMe }))
                         }
                         />
-                        
-                        <p className="remember-label">recordame</p>
+                        <p className="remember-label">Recordarme</p>
                     
                     </div>
 

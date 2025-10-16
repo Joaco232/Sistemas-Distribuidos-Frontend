@@ -35,7 +35,7 @@
 /* Cuando el input está marcado */
 .hidden-xs-up:checked + .cbx {
   border-color: transparent;
-  background: #6871f1;
+  background: rgba(0, 41, 248, 0.35)c;  /*evaluar ese efecto u otro.*/
   animation: jelly 0.6s ease;
 }
 
