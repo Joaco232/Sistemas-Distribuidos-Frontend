@@ -1,23 +1,34 @@
 
 const BACK_URL = import.meta.env.VITE_API_BACK_URL  || "http://localhost:8080";
 
-export async function registerUser(userData) {
-    const response = await fetch(`${BACK_URL}/user`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userData),
-    });
+export async function registerUser(userData, timeout = 3000) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeout);
 
-    if (!response.ok) {
+    try {
+        const response = await fetch(`${BACK_URL}/user`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(userData),
+            signal: controller.signal, // 👈 permite abortar la request
+        });
 
-        const errorData = await response.json();
+        clearTimeout(timeoutId);
 
-        const message = errorData?.message || "Error desconocido al registrar el usuario.";
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            const message = errorData?.message || "Error desconocido al registrar el usuario.";
+            throw new Error(message);
+        }
 
-        throw new Error(message);
+        return await response.json();
+
+    } catch (error) {
+        if (error.name === "AbortError") {
+            throw new Error("Tiempo de espera agotado. Intente nuevamente.");
+        }
+        throw error;
     }
-
-    return response.json();
 }
 
 

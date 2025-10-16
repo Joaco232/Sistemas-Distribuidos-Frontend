@@ -10,6 +10,7 @@ import Footer from "../components/Footer.jsx";
 import {useState} from "react";
 import {registerUser} from "../services/apiUser.js";
 import { useNavigate } from "react-router-dom";
+import LoaderSpinner from "../components/LoaderSpinner/LoaderSpinner.jsx";
 
 
 
@@ -46,6 +47,7 @@ export default function Register() {
     }
 
     const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
 
     async function handleSubmit(e) {
 
@@ -56,6 +58,7 @@ export default function Register() {
             setError("Por favor, complete todos los campos.");
             return;
         }
+
         if (!formData.email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)) {
             setError("Por favor, ingrese un email válido.");
             return;
@@ -70,16 +73,25 @@ export default function Register() {
         }
 
         try {
+            setLoading(true);
 
-            let userData = {
+            const userData = {
                 name: formData.name,
                 birthDate: formData.birthDate,
                 email: formData.email,
                 password: formData.password1
             };
-            const response = await registerUser(userData);
+
+            const response = await registerUser(userData, 5000);
+
             console.log("Usuario registrado:", response);
+
             setError("");
+
+            setLoading(false);
+
+            setTimeout(() => navigate("/login"), 100);
+
 
         } catch (error) {
 
@@ -143,6 +155,14 @@ export default function Register() {
             </div>
 
             <Footer className="register-footer"></Footer>
+
+            {loading && (
+                <div className="loading-overlay">
+                    <div className="loader-container">
+                        <LoaderSpinner/>
+                    </div>
+                </div>
+            )}
 
         </div>
     );
