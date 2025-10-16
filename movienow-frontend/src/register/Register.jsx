@@ -9,12 +9,16 @@ import ButtonGlass from "../components/ButtonGlass.jsx";
 import Footer from "../components/Footer.jsx";
 import {useState} from "react";
 import {registerUser} from "../services/apiUser.js";
+import { useNavigate } from "react-router-dom";
 
 
 
 export default function Register() {
+    
 
     const today = new Date().toISOString().split("T")[0];
+
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         name: "",
@@ -23,6 +27,10 @@ export default function Register() {
         password1: "",
         password2: ""
     });
+
+    function goToLogin() {
+        navigate("/login");
+    }
 
     function handleChange(e) {
         const { name, value } = e.target;
@@ -88,7 +96,7 @@ export default function Register() {
 
                 <img className="logo-header" src={LogoB} alt="MovieNow logo"/>
 
-                <button className="sign-in-button">Iniciar sesión</button>
+                <button className="sign-in-button" onClick={goToLogin}> Iniciar sesión </button>
 
             </Header>
 
