@@ -1,0 +1,59 @@
+.home-page {
+    position: relative;
+    min-height: 500vh;
+    min-width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+}
+
+.home-page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+            linear-gradient(
+                    to bottom right,
+                    rgba(3, 23, 46, 0.91) 0%,
+                    rgba(7, 36, 74, 0.82) 10%,
+                    rgba(14, 66, 128, 0.78) 50%,
+                    rgba(145, 156, 170, 0.45) 100%
+            ),
+            url('../assets/images/Fondo.jpg');
+    background-size: auto;
+    background-repeat: repeat;
+    filter: blur(2px);
+    z-index: 0;
+}
+
+.home-page > * {
+    position: relative;
+    z-index: 1;
+}
+
+.logo-header-home {
+
+    height: 30px;
+    margin: 0;
+    cursor: pointer;
+    opacity: 0.85;
+    &:hover {
+        opacity: 1;
+        filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.6));
+
+    }
+
+}
+
+
+.home-body {
+    padding: 0;
+    background-color: rgba(211, 196, 196, 0);
+    height: auto;
+    flex-grow: 1;
+    overflow-y: auto;
+    min-height: calc(100vh - 60px);
+    align-content: center;
+
+
+}

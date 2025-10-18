@@ -30,7 +30,7 @@
     z-index: 1;
 }
 
-.logo-header {
+.logo-header-register {
 
     height: 30px;
     margin: 0;
@@ -38,6 +38,7 @@
     opacity: 0.85;
     &:hover {
         opacity: 1;
+        filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.6));
     }
 
 }
@@ -57,8 +58,24 @@
 
     &:hover {
         color: #ffffff;
+        text-shadow: 0 0 4px #ffffff;
+
+
     }
 
+}
+.login-line {
+    display: inline-flex;
+    align-items: center;
+    gap: 1px;
+}
+
+.text-login-header {
+
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: rgb(163, 194, 227);
 }
 
 .register-header {
@@ -67,6 +84,12 @@
     align-items: center;
     padding: 10px 30px;
 }
+
+
+
+
+
+
 
 .register-body {
     padding: 0;
@@ -82,7 +105,7 @@
 
 .form-container {
 
-    width: 450px;
+    width: 500px;
     margin: 15px auto;
     padding: 27px 50px;
 }

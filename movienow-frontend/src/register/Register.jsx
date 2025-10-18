@@ -2,11 +2,11 @@
 import "./Register.css";
 import LogoB from "../assets/images/movienow-logo-w-m.png";
 import Imagotipo from "../assets/images/movienow-logo-w.png";
-import ContainerGlass from "../components/ContainerGlass.jsx";
-import InputField from "../components/InputField.jsx";
-import Header from "../components/Header.jsx";
-import ButtonGlass from "../components/ButtonGlass.jsx";
-import Footer from "../components/Footer.jsx";
+import ContainerGlass from "../components/ContainerGlass/ContainerGlass.jsx";
+import InputField from "../components/InputField/InputField.jsx";
+import Header from "../components/Header/Header.jsx";
+import ButtonGlass from "../components/ButtonGlass/ButtonGlass.jsx";
+import Footer from "../components/Footer/Footer.jsx";
 import {useState} from "react";
 import {registerUser} from "../services/apiUser.js";
 import { useNavigate } from "react-router-dom";
@@ -106,13 +106,18 @@ export default function Register() {
 
             <Header className="register-header">
 
-                <img className="logo-header" src={LogoB} alt="MovieNow logo"/>
+                <img className="logo-header-register" src={LogoB} alt="MovieNow logo"/>
 
-                <button className="sign-in-button" onClick={goToLogin}> Iniciar sesión </button>
+                <div className="login-line">
+                    <span className="text-login-header">Ya tenés una cuenta?</span>
+                    <button className="sign-in-button" onClick={goToLogin}>
+                        Iniciar sesión
+                    </button>
+                </div>
 
             </Header>
 
-            <div className="register-body" onSubmit={handleSubmit}>
+            <div className="register-body">
 
                 <ContainerGlass className="form-container">
 
@@ -122,7 +127,7 @@ export default function Register() {
 
                     <p className="register-slogan">Ninguna película se nos escapa.</p>
 
-                    <form className="register-form">
+                    <form className="register-form" onSubmit={handleSubmit}>
 
                         <InputField label="Nombre Completo" name="name" className="text-input"
                                     value={formData.name} type={"text"} onChange={handleChange}

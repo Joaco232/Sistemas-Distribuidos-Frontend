@@ -10,7 +10,7 @@ export async function registerUser(userData, timeout = 3000) {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(userData),
-            signal: controller.signal, // 👈 permite abortar la request
+            signal: controller.signal,
         });
 
         clearTimeout(timeoutId);
