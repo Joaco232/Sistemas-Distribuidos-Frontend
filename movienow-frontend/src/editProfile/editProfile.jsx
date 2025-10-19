@@ -1,7 +1,7 @@
 import "./editProfile.css";
-import ContainerGlass from "../components/ContainerGlass.jsx";
-import Header from "../components/Header.jsx";
-import Footer from "../components/Footer.jsx";
+import ContainerGlass from "../components/ContainerGlass/ContainerGlass.jsx";
+import Header from "../components/Header/Header.jsx";
+import Footer from "../components/Footer/Footer.jsx";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import LogoB from "../assets/images/movienow-logo-w-m.png";
@@ -26,7 +26,7 @@ export default function ProfileEdit() {
   }
 
   function handleEdit(field) {
-    navigate(`/edit/${field}`); // ejemplo: /edit/email
+    navigate(`/edit/${field}`);
   }
 
   return (
@@ -77,6 +77,13 @@ export default function ProfileEdit() {
                 <span className="field-value">{profileData.Foto}</span>
               </div>
               <User2 className="edit-icon" />
+            </li>
+            <li onClick={() => handleEdit("ejemplo")}>
+              <div className="ejemplo">
+                <span className="field-name">Ejemplo</span>
+                <span className="field-value">{profileData.Foto}</span>
+              </div>
+              <Pencil className="edit-icon" />
             </li>
           </ul>
         </ContainerGlass>
