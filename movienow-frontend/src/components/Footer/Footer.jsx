@@ -1,6 +1,6 @@
 import React from "react";
 import "./Footer.css";
-import Imagotipo from "../assets/images/movienow-logo-w.png";
+import Imagotipo from "../../assets/images/movienow-logo-w.png";
 
 const Footer = ({className = "" }) => {
     return (
