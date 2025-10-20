@@ -90,3 +90,62 @@ export async function loginUser(userLogin) {
 
   return isJson ? await response.json() : null;
 }
+
+/**
+ * Obtiene los datos del usuario autenticado
+ */
+export async function getCurrentUser(timeout = 3000) {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeout);
+
+  const token = localStorage.getItem("token") || sessionStorage.getItem("token");
+  if (!token) {
+    throw new Error("No hay token de autenticación disponible.");
+  }
+
+  try {
+    const response = await fetch(`${BACK_URL}/user/me`, {
+      method: "GET",
+      headers: {
+        "Accept": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
+      signal: controller.signal,
+    });
+
+    clearTimeout(timeoutId);
+
+    // Verificar si la respuesta es JSON
+    const isJson = response.headers
+      ?.get("content-type")
+      ?.toLowerCase()
+      ?.includes("application/json");
+
+    // Leer posibles errores
+    const errorData = !response.ok && isJson
+      ? await response.json().catch(() => ({}))
+      : {};
+
+    if (!response.ok) {
+      const message =
+        errorData?.message ||
+        errorData?.detail ||
+        errorData?.error ||
+        errorData?.title ||
+        "Error al obtener los datos del usuario.";
+      throw new Error(message);
+    }
+
+    // Devolver el JSON del usuario
+    return isJson ? await response.json() : null;
+
+  } catch (error) {
+    clearTimeout(timeoutId);
+
+    if (error.name === "AbortError") {
+      throw new Error("Tiempo de espera agotado. Intente nuevamente.");
+    }
+
+    throw error;
+  }
+}

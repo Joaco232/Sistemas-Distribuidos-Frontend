@@ -5,6 +5,7 @@ import Footer from "../components/Footer/Footer.jsx";
 import { User2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
+import { getCurrentUser } from "../services/apiUser.js";
 
 
 
@@ -12,7 +13,18 @@ export default function Home() {
 
     const navigate = useNavigate();
     const [menuOpen, setMenuOpen] = useState(false);
+    const [user, setUser] = useState(null);
     const menuRef = useRef(null);
+
+    function goToLogin() {
+        navigate("/login");
+        setMenuOpen(false); 
+    }
+
+     function goToProfile() {
+        navigate("/edit-profile");
+        setMenuOpen(false); 
+    }
 
     function toggleMenu() {
         setMenuOpen((prev) => !prev);
@@ -22,6 +34,13 @@ export default function Home() {
         navigate("/edit-profile");
         setMenuOpen(false); 
     }
+
+    useEffect(() => {
+    getCurrentUser()
+        .then(setUser)
+        .catch(err => console.error(err));
+    }, []);
+
 
 
     useEffect(() => {
@@ -43,13 +62,21 @@ export default function Home() {
                 <img className="logo-header-home" src={LogoB} alt="MovieNow logo"/>
 
                 <div className="user-menu-container" ref={menuRef}>
+                    <span className="user-display-name">{user ? user.name : "Invitado"}</span>
                     <User2 className="user-icon" onClick={toggleMenu} />
+                    
 
                     {menuOpen && (
                         <div className="user-dropdown">
-                        <button onClick={goToProfile}>Editar perfil</button>
-                        <button>Mis Peliculas</button>
-                        <button>Cerrar sesión</button>
+                        {user ? (
+                            <>
+                            <button onClick={goToProfile}>Editar perfil</button>
+                            <button>Mis Películas</button>
+                            <button>Cerrar sesión</button>
+                            </>
+                        ) : (
+                            <button onClick={goToLogin}>Iniciar sesión</button>
+                        )}
                         </div>
                 )}
                 </div>

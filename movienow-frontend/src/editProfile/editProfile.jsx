@@ -9,17 +9,15 @@ import Imagotipo from "../assets/images/movienow-logo-w.png";
 import { Pencil } from 'lucide-react';
 import { Film } from "lucide-react";
 import { User2 } from "lucide-react";
+import { Star } from "lucide-react";
+import { getCurrentUser } from "../services/apiUser.js";
+import { useEffect } from "react";
 
 
 export default function ProfileEdit() {
   const navigate = useNavigate();
+  const [user, setUser] = useState(null);
 
-  // como no vi el back buse ejemplos para que rellene
-  const [profileData, setProfileData] = useState({
-    nombre: "Joaco puto",
-    email: "correo@example.com",
-    contraseña: "********",
-  });
 
   function goBack() {
     navigate("/home");
@@ -28,6 +26,12 @@ export default function ProfileEdit() {
   function handleEdit(field) {
     navigate(`/edit/${field}`);
   }
+
+  useEffect(() => {
+    getCurrentUser()
+      .then(setUser)
+      .catch(err => console.error(err));
+  }, []);
 
   return (
     <div className="profile-page">
@@ -45,45 +49,41 @@ export default function ProfileEdit() {
 
       <div className="profile-body">
         <ContainerGlass className="profile-container">
-          <p className="profile-title">Editar Perfil</p>
           <img className="logo-form" src={Imagotipo} alt="MovieNow logo" />
-          <p className="profile-slogan">Personalizá tu experiencia MovieNow</p>
+          <p className="profile-slogan">Mejora tu experiencia MovieNow</p>
 
           <ul className="profile-list">
             <li onClick={() => handleEdit("name")}>
               <div className="Name">
                 <span className="field-name">Nombre</span>
-                <span className="field-value">{profileData.nombre}</span>
+                <span className="field-value">{user?.name ?? "-"}</span>
               </div>
               <Pencil className="edit-icon" />
             </li>
             <li onClick={() => handleEdit("password")}>
               <div className="Contra">
                 <span className="field-name">Contraseña</span>
-                <span className="field-value">{profileData.contraseña}</span>
+                <span className="field-value">********</span>
               </div>
               <Pencil className="edit-icon" />
+            </li>
+             <li onClick={() => handleEdit("foto")}>
+              <div className="Foto">
+                <span className="field-name">Foto de Perfil</span>
+              </div>
+              <User2 className="edit-icon" />
             </li>
             <li onClick={() => handleEdit("plataforms")}>
               <div className="Plataformas">
                 <span className="field-name">Plataformas</span>
-                <span className="field-value">{profileData.plataformas}</span>
               </div>
               <Film className="edit-icon" />
             </li>
-            <li onClick={() => handleEdit("foto")}>
-              <div className="Foto">
-                <span className="field-name">Foto de Perfil</span>
-                <span className="field-value">{profileData.Foto}</span>
+            <li onClick={() => handleEdit("Generos Favoritos")}>
+              <div className="Generos Favoritos">
+                <span className="field-name">Generos Favoritos</span>
               </div>
-              <User2 className="edit-icon" />
-            </li>
-            <li onClick={() => handleEdit("ejemplo")}>
-              <div className="ejemplo">
-                <span className="field-name">Ejemplo</span>
-                <span className="field-value">{profileData.Foto}</span>
-              </div>
-              <Pencil className="edit-icon" />
+              <Star className="star-icon" />
             </li>
           </ul>
         </ContainerGlass>

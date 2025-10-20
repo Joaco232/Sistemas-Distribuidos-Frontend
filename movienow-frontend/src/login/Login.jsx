@@ -55,8 +55,31 @@ export default function Login() {
             const response = await loginUser(formData);
             console.log("Usuario logueado:", response);
             setError("");
+            goToHome();
+              const token = response?.token;
 
-        } catch (error) {
+            if (!token) {
+            throw new Error("No se recibió token del servidor.");
+            }
+
+            // Guardamos el token en el almacenamiento correcto
+            if (formData.rememberMe) {
+            localStorage.setItem("token", token);
+            sessionStorage.removeItem("token");
+            } else {
+            sessionStorage.setItem("token", token);
+            localStorage.removeItem("token");
+            }
+
+            // Limpiamos errores y navegamos al home
+            setError("");
+            navigate("/home");
+
+
+        } 
+        
+        catch (error) {
+            console.error(error);
             setError(error.message);
         }
     }

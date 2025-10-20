@@ -135,7 +135,7 @@ export default function Register() {
 
                     <form className="register-form" onSubmit={handleSubmit}>
 
-                        <InputField label="Nombre Completo" name="name" className="text-input"
+                        <InputField label="Nombre" name="name" className="text-input"
                                     value={formData.name} type={"text"} onChange={handleChange}
                                     maxLength={50}/>
 

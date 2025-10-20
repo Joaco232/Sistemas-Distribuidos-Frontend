@@ -31,6 +31,13 @@
     z-index: 1;
 }
 
+.user-display-name{
+  position: relative;
+  color: rgba(255, 255, 255, 0.85);
+  margin-right: 20px;
+  font-size: 18px;
+}
+
 .logo-header-home {
 
     height: 30px;
@@ -48,11 +55,13 @@
 .user-menu-container {
   position: relative;
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
 }
 
 .user-icon {
+  position: relative;
   width: 28px;
   height: 28px;
   color: rgba(255, 255, 255, 0.85);
