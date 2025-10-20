@@ -45,6 +45,71 @@
 
 }
 
+.user-menu-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-icon {
+  width: 28px;
+  height: 28px;
+  color: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.user-icon:hover {
+  color: white;
+  transform: scale(1.1);
+}
+
+.user-dropdown {
+  position: absolute;
+  top: 40px; /* debajo del ícono */
+  right: 0;
+  background: rgba(15, 25, 45, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  padding: 10px 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  min-width: 160px;
+  z-index: 10;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.user-dropdown button {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: left;
+  font-family: "DM Sans", sans-serif;
+  font-size: 15px;
+  padding: 10px 16px;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.2s ease;
+}
+
+.user-dropdown button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 
 .home-body {
     padding: 0;
