@@ -86,7 +86,7 @@ export default function Register() {
                 password: formData.password1
             };
 
-            const response = await registerUser(userData, 500);
+            const response = await registerUser(userData, 5000);
 
             console.log("Usuario registrado:", response);
 
