@@ -16,16 +16,46 @@ export default function Home() {
 
                 <img className="logo-header-home" src={LogoB} alt="MovieNow logo"/>
 
-
             </Header>
 
             <div className="home-body" >
 
+                <div className="home-search">
+
+                    <div className="home-search-logo">
+
+
+                    </div>
+
+                    <div className="home-search-bar">
+
+                    </div>
+
+
+                    <div className="home-search-results">
+
+                    </div>
+
+                </div>
+
+                <div className="home-recommendations">
+
+                    <div className="home-recommendations-top">
+
+                    </div>
+
+                    <div className="home-recommendations-personalized">
+
+                    </div>
+                    
+                </div>
+
+
             </div>
 
+            <Footer className="home-footer">
 
-
-            <Footer className="home-footer"></Footer>
+            </Footer>
 
         </div>
     );

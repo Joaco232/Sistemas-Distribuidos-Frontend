@@ -22,6 +22,10 @@ export default function Login() {
         rememberMe: false
     });
 
+    function goToHome() {
+        navigate("/home");
+    }
+
     function goToRegister() {
         navigate("/signup");
     }
@@ -72,7 +76,7 @@ export default function Login() {
 
             <Header className="login-header">
 
-                <img className="logo-header-login" src={LogoB} alt="MovieNow logo" />
+                <img className="logo-header-login" src={LogoB} onClick={goToHome} alt="MovieNow logo" />
 
                 <div className="register-line">
                     <span className="text-register-header">Eres nuevo en MovieNow?</span>

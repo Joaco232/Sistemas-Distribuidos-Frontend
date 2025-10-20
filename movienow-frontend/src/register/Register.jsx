@@ -33,6 +33,10 @@ export default function Register() {
         navigate("/login");
     }
 
+    function goToHome() {
+        navigate("/home");
+    }
+
     function handleChange(e) {
         const { name, value } = e.target;
 
@@ -82,7 +86,7 @@ export default function Register() {
                 password: formData.password1
             };
 
-            const response = await registerUser(userData, 5000);
+            const response = await registerUser(userData, 500);
 
             console.log("Usuario registrado:", response);
 
@@ -96,6 +100,8 @@ export default function Register() {
         } catch (error) {
 
             setError(error.message);
+            setLoading(false);
+
         }
     }
 
@@ -106,7 +112,7 @@ export default function Register() {
 
             <Header className="register-header">
 
-                <img className="logo-header-register" src={LogoB} alt="MovieNow logo"/>
+                <img className="logo-header-register" src={LogoB} onClick={goToHome} alt="MovieNow logo"/>
 
                 <div className="login-line">
                     <span className="text-login-header">Ya tenés una cuenta?</span>
