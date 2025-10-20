@@ -17,7 +17,7 @@ import LoaderSpinner from "../components/LoaderSpinner/LoaderSpinner.jsx";
 export default function Register() {
     
 
-    const today = new Date().toISOString().split("T")[0];
+    const today = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString().split("T")[0];
 
     const navigate = useNavigate();
 

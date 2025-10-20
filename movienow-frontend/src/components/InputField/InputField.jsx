@@ -44,12 +44,13 @@ const InputField = ({
             // Si no hay valor aún, se coloca la fecha de hoy automáticamente
             if (!value) {
                 const today = new Date();
+                today.setDate(today.getDate() - 1); // 👈 resta un día (ayer)
                 const yyyy = today.getFullYear();
                 const mm = String(today.getMonth() + 1).padStart(2, "0");
                 const dd = String(today.getDate()).padStart(2, "0");
-                const todayISO = `${yyyy}-${mm}-${dd}`;
-                onChange({ target: { name, value: todayISO } });
-            }
+                const yesterdayISO = `${yyyy}-${mm}-${dd}`;
+                onChange({ target: { name, value: yesterdayISO } });
+                }
         }
     };
 

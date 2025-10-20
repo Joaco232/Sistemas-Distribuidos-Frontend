@@ -40,21 +40,13 @@ export default function Login() {
     }
     const [error, setError] = useState("");
 
-    async function handleSubmit(e) {
+    async function handleSubmitLogin(e) {
 
         e.preventDefault();
 
         if (Object.values(formData).some(value => String(value).trim() === "")) {
 
             setError("Por favor, complete todos los campos.");
-            return;
-        }
-        if (!formData.email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)) {
-            setError("Por favor, ingrese un email válido.");
-            return;
-        }
-        if (formData.password.length < 8 && !formData.password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=\[{\]};:'",<.>/?\\|`~]).{8,}$/)) {
-            setError("La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial.");
             return;
         }
 
@@ -97,7 +89,7 @@ export default function Login() {
 
                     <p className="login-slogan">Encuentra tu próxima película.</p>
 
-                    <form className="login-form" onSubmit={handleSubmit}>
+                    <form className="login-form" onSubmit={handleSubmitLogin}>
 
                         <InputField label="Email" name="email" className="text-input"
                                     value={formData.email} type="text" onChange={handleChange}
@@ -122,7 +114,7 @@ export default function Login() {
 
                         {error && <p className="error-text">{error}</p>}
 
-                        <ButtonGlass type="submit" className="form-button-login">Ingresar</ButtonGlass>
+                        <ButtonGlass type="submit"  className="form-button-login">Ingresar</ButtonGlass>
 
                     </form>
 

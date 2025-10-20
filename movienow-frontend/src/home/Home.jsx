@@ -48,7 +48,6 @@ export default function Home() {
                     {menuOpen && (
                         <div className="user-dropdown">
                         <button onClick={goToProfile}>Editar perfil</button>
-                        <button>Ejemplo</button>
                         <button>Mis Peliculas</button>
                         <button>Cerrar sesión</button>
                         </div>
