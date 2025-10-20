@@ -14,11 +14,11 @@ import { User2 } from "lucide-react";
 export default function ProfileEdit() {
   const navigate = useNavigate();
 
+  // como no vi el back buse ejemplos para que rellene
   const [profileData, setProfileData] = useState({
-    nombre: "Bautista Arruabarrena",
-    email: "bautista@example.com",
+    nombre: "Joaco puto",
+    email: "correo@example.com",
     contraseña: "********",
-    preferencias: "Acción, Ciencia Ficción",
   });
 
   function goBack() {
