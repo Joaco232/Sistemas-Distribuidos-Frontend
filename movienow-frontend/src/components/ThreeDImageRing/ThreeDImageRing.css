@@ -1,0 +1,29 @@
+.ring-container {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ring-wrapper {
+  position: relative;
+}
+
+.ring {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+}
+
+.ring-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  backface-visibility: hidden;
+  transition: opacity 0.3s ease;
+}

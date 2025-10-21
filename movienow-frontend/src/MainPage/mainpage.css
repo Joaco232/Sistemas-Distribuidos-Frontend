@@ -1,0 +1,40 @@
+.main-page {
+  min-height: 200vh; /* para que haya scroll */
+  background: linear-gradient(to bottom right, #050505, #111111);
+  color: white;
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+}
+
+.main-header {
+  position: sticky;
+  top: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  text-align: center;
+  padding: 15px 0;
+  z-index: 10;
+}
+
+.main-title {
+  margin: 0;
+  font-size: 32px;
+  letter-spacing: 2px;
+}
+
+.main-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  padding-top: 20px;
+}
+
+.filler-section {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #aaa;
+  font-size: 18px;
+}
