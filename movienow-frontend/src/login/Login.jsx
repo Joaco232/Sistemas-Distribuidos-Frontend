@@ -62,7 +62,6 @@ export default function Login() {
             throw new Error("No se recibió token del servidor.");
             }
 
-            // Guardamos el token en el almacenamiento correcto
             if (formData.rememberMe) {
             localStorage.setItem("token", token);
             sessionStorage.removeItem("token");
@@ -71,11 +70,8 @@ export default function Login() {
             localStorage.removeItem("token");
             }
 
-            // Limpiamos errores y navegamos al home
             setError("");
             navigate("/home");
-
-
         } 
         
         catch (error) {
