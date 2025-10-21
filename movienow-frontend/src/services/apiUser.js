@@ -149,3 +149,28 @@ export async function getCurrentUser(timeout = 3000) {
     throw error;
   }
 }
+
+
+
+
+
+
+export async function changePassword(data) {
+  const token = localStorage.getItem("token") || sessionStorage.getItem("token");
+
+  const response = await fetch(`${import.meta.env.VITE_API_BACK_URL}/user/password`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify(data)
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || "Error al cambiar la contraseña");
+  }
+
+  return await response.json();
+}

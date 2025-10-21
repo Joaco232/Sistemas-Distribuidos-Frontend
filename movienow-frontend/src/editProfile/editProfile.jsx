@@ -23,9 +23,10 @@ export default function ProfileEdit() {
     navigate("/home");
   }
 
-  function handleEdit(field) {
-    navigate(`/edit/${field}`);
+  function goEditPassword() {
+    navigate("/edit-password");
   }
+
 
   useEffect(() => {
     getCurrentUser()
@@ -60,7 +61,7 @@ export default function ProfileEdit() {
               </div>
               <Pencil className="edit-icon" />
             </li>
-            <li onClick={() => handleEdit("password")}>
+            <li onClick={goEditPassword}>
               <div className="Contra">
                 <span className="field-name">Contraseña</span>
                 <span className="field-value">********</span>
