@@ -96,7 +96,7 @@ export default function EditPassword() {
 
                         {error && <p className="error-text">{error}</p>}
                     
-                        <ButtonGlass type="submit" className="submit-button">
+                        <ButtonGlass type="submit" className="form-button">
                             Aplicar
                         </ButtonGlass>
                     </form>

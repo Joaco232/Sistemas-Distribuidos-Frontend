@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProfileEdit from "./editProfile/editProfile";
 import Home from "./home/Home";
 import EditPassword from "./editPassword/editPassword";
+import EditProfileName from "./editProfileName/editProfileName";
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                 <Route path="/home" element={<Home />} />
                 <Route path="/main" element={<MainPage />} />
                 <Route path="/edit-password" element={<EditPassword />} />
+                <Route path="/edit-profile-name" element={<EditProfileName />}/>
             </Routes>
         </Router>
     );

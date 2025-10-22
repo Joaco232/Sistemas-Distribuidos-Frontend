@@ -27,6 +27,10 @@ export default function ProfileEdit() {
     navigate("/edit-password");
   }
 
+  function goEditName() {
+    navigate("/edit-profile-name");
+  }
+
 
   useEffect(() => {
     getCurrentUser()
@@ -54,7 +58,7 @@ export default function ProfileEdit() {
           <p className="profile-slogan">Mejora tu experiencia MovieNow</p>
 
           <ul className="profile-list">
-            <li onClick={() => handleEdit("name")}>
+            <li onClick={goEditName}>
               <div className="Name">
                 <span className="field-name">Nombre</span>
                 <span className="field-value">{user?.name ?? "-"}</span>

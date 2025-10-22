@@ -6,6 +6,7 @@ import ContainerGlass from "../components/ContainerGlass/ContainerGlass";
 import { useNavigate } from "react-router-dom";
 import InputField from "../components/InputField/InputField";
 import ButtonGlass from "../components/ButtonGlass/ButtonGlass";   
+import { changeName } from "../services/apiUser.js";
 
 export default function EditProfileName() {
 
@@ -86,7 +87,7 @@ export default function EditProfileName() {
 
                         {error && <p className="error-message">{error}</p>}
 
-                        <ButtonGlass type="submit" className="submit-button">
+                        <ButtonGlass type="submit" className="form-button">
                             Aplicar
                         </ButtonGlass>
                     </form>
