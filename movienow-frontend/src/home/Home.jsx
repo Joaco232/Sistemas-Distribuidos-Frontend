@@ -1,11 +1,13 @@
-import "./Home.css";
 import LogoB from "../assets/images/movienow-logo-w-m.png";
+import Imagotipo from "../assets/images/movienow-logo-w.png";
 import Header from "../components/Header/Header.jsx";
 import Footer from "../components/Footer/Footer.jsx";
 import { User2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { getCurrentUser } from "../services/apiUser.js";
+import SearchBar from "../components/SearchBar/SearchBar.jsx";
+import "./Home.css";
 
 
 
@@ -18,11 +20,6 @@ export default function Home() {
 
     function goToLogin() {
         navigate("/login");
-        setMenuOpen(false); 
-    }
-
-     function goToProfile() {
-        navigate("/edit-profile");
         setMenuOpen(false); 
     }
 
@@ -40,8 +37,6 @@ export default function Home() {
         .then(setUser)
         .catch(err => console.error(err));
     }, []);
-
-
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -81,10 +76,21 @@ export default function Home() {
                 )}
                 </div>
 
-
             </Header>
 
-            <div className="home-body" >
+            <div className="home-body">
+
+                <div className="home-search-bar-div">
+
+                    <img className="logo-body-home" src={Imagotipo} alt="MovieNow logo"/>
+                    <SearchBar className="search-bar-home" placeholder="Buscar película..." onSearch={(query) => console.log("Buscar:", query)} />
+
+                </div>
+                <div className="home-search-results-div"></div>
+
+
+
+
 
             </div>
 

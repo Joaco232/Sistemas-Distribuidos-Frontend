@@ -1,6 +1,7 @@
 /* src/index.css */
 
 * {
+  font-family: 'DM Sans', sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -14,7 +15,7 @@ html, body, #root {
 
 /* Fuente genérica, pero neutra */
 body {
-  font-family: sans-serif;
+  font-family: 'DM Sans', sans-serif;
   background-color: #fff;
   color: #000;
 }

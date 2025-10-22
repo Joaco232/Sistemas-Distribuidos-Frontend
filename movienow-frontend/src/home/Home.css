@@ -14,10 +14,10 @@
     background:
             linear-gradient(
                     to bottom right,
-                    rgba(3, 23, 46, 0.91) 0%,
-                    rgba(7, 36, 74, 0.82) 10%,
-                    rgba(14, 66, 128, 0.78) 50%,
-                    rgba(145, 156, 170, 0.45) 100%
+                    rgba(2, 16, 32, 0.93) 0%,
+                    rgba(5, 27, 55, 0.88) 10%,
+                    rgba(11, 49, 94, 0.85) 50%,
+                    rgba(116, 124, 135, 0.6) 100%
             ),
             url('../assets/images/Fondo.jpg');
     background-size: auto;
@@ -32,10 +32,11 @@
 }
 
 .user-display-name{
-  position: relative;
-  color: rgba(255, 255, 255, 0.85);
-  margin-right: 20px;
-  font-size: 18px;
+    position: relative;
+    color: rgba(255, 255, 255, 0.85);
+    margin-right: 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 18px;
 }
 
 .logo-header-home {
@@ -53,81 +54,171 @@
 }
 
 .user-menu-container {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
 .user-icon {
-  position: relative;
-  width: 28px;
-  height: 28px;
-  color: rgba(255, 255, 255, 0.85);
-  cursor: pointer;
-  transition: color 0.2s ease, transform 0.2s ease;
+    position: relative;
+    width: 28px;
+    height: 28px;
+    color: rgba(255, 255, 255, 0.85);
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.2s ease;
+    &:hover {
+        opacity: 1;
+        filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.6));
+
+    }
 }
 
 .user-icon:hover {
-  color: white;
-  transform: scale(1.1);
+    color: white;
+    transform: scale(1.1);
 }
 
 .user-dropdown {
-  position: absolute;
-  top: 40px; /* debajo del ícono */
-  right: 0;
-  background: rgba(15, 25, 45, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 10px;
-  padding: 10px 0;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-  display: flex;
-  flex-direction: column;
-  min-width: 160px;
-  z-index: 10;
-  animation: fadeIn 0.2s ease-in-out;
+    position: absolute;
+    top: 40px; /* debajo del ícono */
+    right: 0;
+    background: rgba(15, 25, 45, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    padding: 10px 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    min-width: 160px;
+    z-index: 10;
+    animation: fadeIn 0.2s ease-in-out;
 }
 
 .user-dropdown button {
-  background: transparent;
-  border: none;
-  color: rgba(255, 255, 255, 0.9);
-  text-align: left;
-  font-family: "DM Sans", sans-serif;
-  font-size: 15px;
-  padding: 10px 16px;
-  cursor: pointer;
-  width: 100%;
-  transition: background 0.2s ease;
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.9);
+    text-align: left;
+    font-family: "DM Sans", sans-serif;
+    font-size: 15px;
+    padding: 10px 16px;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.2s ease;
 }
 
 .user-dropdown button:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-5px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
+
+
+
+
+
+
 
 
 .home-body {
-    padding: 0;
-    background-color: rgba(211, 196, 196, 0);
-    height: auto;
-    flex-grow: 1;
-    overflow-y: auto;
+    background-color: transparent;
     min-height: calc(100vh - 60px);
-    align-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.home-search-bar-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1 1 auto;
+    padding: clamp(12px, 3vw, 32px);
+    gap: clamp(12px, 3vh, 32px);
+    transform: translateY(-8vh);
+}
+
+
+.logo-body-home {
+    width: clamp(160px, 40vw, 480px);
+    height: auto;
+    max-width: 100%;
+    filter: drop-shadow(0 4px 7px rgba(0, 0, 0, 0.63));
+}
+
+
+.search-bar-home {
+    width: min(720px, 88vw);
+    max-height: 55px;
+    margin: 0;
+}
+
+.search-bar-home-input {
+    color: rgb(255, 255, 255);
+    font-family: 'DM Sans', sans-serif;
+    font-size: clamp(12px, 1.5vw, 19px);
+    font-weight: 300;
+
+}
+
+.search-bar-home-input::placeholder {
+    color: rgba(255, 255, 255, 0.67);
+    font-family: 'DM Sans', sans-serif;
+    font-size: clamp(12px, 1.5vw, 19px);
+    font-weight: 300;
 
 
 }
+
+
+.search-bar-home * {
+    box-sizing: border-box;
+}
+.search-bar-home input[type="text"],
+.search-bar-home input[type="search"] {
+    width: 100%;
+    height: clamp(40px, 6.5vw, 56px);
+
+}
+
+
+@media (max-width: 1024px) {
+    .home-search-bar-div {
+        padding: 24px;
+        gap: 20px;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .logo-body-home {
+        width: clamp(140px, 55vw, 360px);
+    }
+    .search-bar-home {
+        width: 92vw;
+    }
+}
+
+
+@media (max-width: 420px) {
+    .logo-body-home {
+        width: clamp(120px, 65vw, 300px);
+    }
+    .search-bar-home {
+        width: 94vw;
+    }
+}
+
