@@ -174,3 +174,24 @@ export async function changePassword(data) {
 
   return await response.json();
 }
+
+
+export async function changeName(data) {
+
+  const token = localStorage.getItem("token") || sessionStorage.getItem("token");
+  const response = await fetch(`${import.meta.env.VITE_API_BACK_URL}/user/name`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify(data)
+  });
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || "Error al cambiar el nombre");
+  }
+
+  return await response.json();
+    
+}
