@@ -7,7 +7,7 @@ import InputField from "../components/InputField/InputField.jsx";
 import Header from "../components/Header/Header.jsx";
 import ButtonGlass from "../components/ButtonGlass/ButtonGlass.jsx";
 import Footer from "../components/Footer/Footer.jsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {registerUser} from "../services/apiUser.js";
 import { useNavigate } from "react-router-dom";
 import LoaderSpinner from "../components/LoaderSpinner/LoaderSpinner.jsx";
@@ -15,7 +15,6 @@ import LoaderSpinner from "../components/LoaderSpinner/LoaderSpinner.jsx";
 
 
 export default function Register() {
-    
 
     const today = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString().split("T")[0];
 

@@ -8,6 +8,7 @@ import { useState, useEffect, useRef } from "react";
 import { getCurrentUser } from "../services/apiUser.js";
 import SearchBar from "../components/SearchBar/SearchBar.jsx";
 import "./Home.css";
+import {fetchMoviesByName} from "../services/apiMovie.js";
 
 
 
@@ -49,6 +50,18 @@ export default function Home() {
     }, []);
 
 
+
+    const [movies, setMovies] = useState([]);
+
+    async function handleSearch(name) {
+        try {
+            const data = await fetchMoviesByName(name);
+            setMovies(data.results || []);
+        } catch (error) {
+            console.error("Error buscando películas:", error);
+        }
+    }
+
     return (
         <div className="home-page">
 
@@ -83,10 +96,18 @@ export default function Home() {
                 <div className="home-search-bar-div">
 
                     <img className="logo-body-home" src={Imagotipo} alt="MovieNow logo"/>
-                    <SearchBar className="search-bar-home" placeholder="Buscar película..." onSearch={(query) => console.log("Buscar:", query)} />
+                    <SearchBar className="search-bar-home" placeholder="Buscar película..." onSearch={handleSearch} />
+
+                    <div className="home-search-results-div">
+                        {movies.map((movie) => (
+                            <p key={movie.id}>{movie.title}</p>
+                        ))}
+
+                    </div>
 
                 </div>
-                <div className="home-search-results-div"></div>
+
+
 
 
 

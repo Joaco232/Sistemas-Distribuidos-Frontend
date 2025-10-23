@@ -135,24 +135,28 @@
 .home-body {
     background-color: transparent;
     min-height: calc(100vh - 60px);
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 
 .home-search-bar-div {
+    background-color: rgba(255, 255, 255, 0.06);
+    min-height: calc(100vh - 60px);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    flex: 1 1 auto;
+    justify-content: flex-start;
     padding: clamp(12px, 3vw, 32px);
     gap: clamp(12px, 3vh, 32px);
-    transform: translateY(-8vh);
 }
 
 
 .logo-body-home {
+    margin-top: 15vh;
+    position: relative;
     width: clamp(160px, 40vw, 480px);
     height: auto;
     max-width: 100%;
@@ -161,6 +165,7 @@
 
 
 .search-bar-home {
+    position: relative;
     width: min(720px, 88vw);
     max-height: 55px;
     margin: 0;
@@ -192,6 +197,18 @@
     width: 100%;
     height: clamp(40px, 6.5vw, 56px);
 
+}
+
+.home-search-results-div {
+    position: relative;
+    width: min(720px, 90vw);
+    margin-top: 24px; /* separación del search */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: #fff;
+    font-family: "DM Sans", sans-serif;
+    font-size: 15px;
 }
 
 

@@ -9,13 +9,15 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-      to bottom right,
-      rgba(0, 0, 0, 0.8) 0%,
-      rgba(0, 0, 0, 0.6) 40%,
-      rgba(255, 255, 255, 0.15) 100%
-    ),
-    url("../assets/images/Fondo.jpg");
+  background:
+          linear-gradient(
+                  to bottom right,
+                  rgba(0, 0, 0, 0.80) 0%,
+                  rgba(0, 0, 0, 0.50) 10%,
+                  rgba(0, 0, 0, 0.40) 50%,
+                  rgba(255, 255, 255, 0.16) 100%
+          ),
+          url('../assets/images/Fondo.jpg');
   background-size: cover;
   filter: blur(2px);
   z-index: 0;
@@ -67,6 +69,11 @@
   background: transparent;
   border: none;
   cursor: pointer;
+  &:hover {
+    opacity: 1;
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.6));
+
+  }
 }
 
 .back-button:hover {
@@ -77,8 +84,9 @@
   flex-grow: 1;
   display: flex;
   justify-content: center;
-  align-items: start;
+  align-items: center;
   padding: 40px 0;
+  height: calc(100vh - 60px);
 }
 
 .profile-container {

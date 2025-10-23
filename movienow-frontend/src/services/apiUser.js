@@ -50,7 +50,6 @@ export async function registerUser(userData, timeout = 3000) {
       throw new Error("Tiempo de espera agotado. Intente nuevamente.");
     }
 
-    // Propagar el error al componente
     throw error;
   }
 }
