@@ -1,7 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { changeUserPlatforms, platforms } from "../services/platformService";
-import React from "react";
+import { useEffect } from "react";
+import Header from "../components/Header/Header.jsx";
+import "./editProfilePlatform.css";
+import LogoB from "../assets/images/movienow-logo-w-m.png";
+import ContainerGlass from "../components/ContainerGlass/ContainerGlass";
+import LoaderSpinner from "../components/LoaderSpinner/LoaderSpinner";
+import PlatformBubble from "../components/ContainerLogo/containerLogo.jsx";
+import { getAllDBPlatforms } from "../services/apiUser.js";
+import ButtonGlass from "../components/ButtonGlass/ButtonGlass.jsx";
 
 
 
@@ -18,17 +25,25 @@ export function EditProfilePlatform() {
     const [platforms, setPlatforms] = useState([]); //meto las platafromas a mano para probar, despues se saca y conectamos con back
 
 
-    useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setPlatforms([
-        { name: "Netflix", logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" },
-        { name: "Disney+", logo: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg" },
-        { name: "HBO Max", logo: "https://upload.wikimedia.org/wikipedia/commons/1/17/HBO_Max_Logo.svg" },
-        { name: "Amazon Prime", logo: "https://upload.wikimedia.org/wikipedia/commons/f/f1/Prime_Video.png" },
-      ]);
-      setLoading(false);
-    }, 1000);
+  useEffect(() => {
+    const fetchPlatforms = async () => {
+      try {
+        setLoading(true);
+        setError("");
+
+        const token = localStorage.getItem("jwt");
+        const data = await getAllDBPlatforms(token);
+        setPlatforms(data);
+
+      } catch (err) {
+        console.error("Error al cargar plataformas:", err);
+        setError("No se pudieron cargar las plataformas.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPlatforms();
   }, []);
     
 
@@ -50,9 +65,11 @@ export function EditProfilePlatform() {
     navigate("/edit-profile");
   }
 
-  function goToHome() {
+  function goBackHome() {
     navigate("/home");
   }
+
+
 
   async function handleSubmitChangePlatform(e) {
     e.preventDefault();
@@ -79,56 +96,54 @@ export function EditProfilePlatform() {
     }
   }
 
-    return (
-    <div style={{
-        backgroundColor: "#222",
-        color: "white",
-        padding: "20px",
-        borderRadius: "8px",
-        margin: "20px",
-    }}>
-        <h2>Plataformas cargadas desde el backend</h2>
+  return (
+    <div className="edit-platform-page">
 
-        {error && <p style={{ color: "red" }}>{error}</p>}
+      <Header className="edit-platform-header">
+        <img
+          className="logo-header-edit-platform"
+          src={LogoB}
+          alt="MovieNow logo"
+          onClick={goBackHome}
+        />
+        <button className="back-button" onClick={goBackEditProfile}>
+          Volver
+        </button>
+      </Header>
 
-        {loading && <p>Cargando plataformas...</p>}
+      <div className="edit-platform-container">
+        <ContainerGlass className="edit-platform-glass">
+          <p className="edit-platform-title">
+            Seleccione Plataformas de Interes
+          </p>
+          {error && <p className="error-message">{error}</p>}
+          {loading && (
+              <div className="loading-overlay">
+                  <div className="loader-container">
+                      <LoaderSpinner/>
+                  </div>
+              </div>
+          )}
+          {!loading && (
+            <div className="every-container-logos">
+              {platforms.map((p) => (
+                <PlatformBubble
+                  key={p.id}
+                  name={p.name}
+                  logo={p.logoUrl}
+                  selected={selectedPlatforms.includes(p.name)}
+                  onClick={() => togglePlatform(p.name)}
+                />
+              ))}
+            </div>            
+          )}
+          
+          <ButtonGlass type="submit" className="form-button-platform">
+              Aplicar
+          </ButtonGlass>
 
-        {!loading && platforms.length === 0 && (
-        <p>No se encontraron plataformas.</p>
-        )}
-
-        <div style={{
-        display: "flex",
-        flexWrap: "wrap",
-        gap: "12px",
-        marginTop: "10px"
-        }}>
-        {platforms.map((p) => (
-            <div
-            key={p.name}
-            style={{
-                backgroundColor: "#333",
-                border: "1px solid #555",
-                padding: "10px",
-                borderRadius: "6px",
-                minWidth: "120px",
-                textAlign: "center"
-            }}
-            >
-            <img
-                src={p.logo}
-                alt={p.name}
-                style={{
-                width: "60px",
-                height: "60px",
-                objectFit: "contain",
-                marginBottom: "6px"
-                }}
-            />
-            <p>{p.name}</p>
-            </div>
-        ))}
-        </div>
+        </ContainerGlass>
+      </div>
     </div>
-    );
+  );
 }

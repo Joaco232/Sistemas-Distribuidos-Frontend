@@ -197,3 +197,22 @@ export async function changeName(data) {
 
 
 
+export async function getAllDBPlatforms(token) {
+  const controller = new AbortController();
+  const response = await fetch(`${import.meta.env.VITE_API_BACK_URL}/provider/all`, {
+    method: "GET",
+    headers: {
+      "Accept": "application/json",
+      "Authorization": `Bearer ${token}`,
+    },
+    signal: controller.signal,
+  });
+
+  if (!response.ok) {
+    const message = `Error ${response.status}: ${response.statusText}`;
+    throw new Error(message);
+  }
+
+  const data = await response.json();
+  return data;
+}

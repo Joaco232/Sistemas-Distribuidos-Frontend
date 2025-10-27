@@ -1,0 +1,62 @@
+.platform-bubble {
+  width: 90px;
+  height: 90px;
+  border-radius: 14%;
+  background: radial-gradient(circle at 30% 30%, rgba(231, 231, 231, 0.033), rgba(21, 151, 202, 0.435));
+  box-shadow: 0 4px 10px rgb(0, 0, 0);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+  position: relative;
+  padding: 0;
+}
+
+
+.platform-bubble::after {
+  content: "";
+  position: absolute;
+  top: 10%;
+  left: 15%;
+  width: 60%;
+  height: 30%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.198);
+  filter: blur(4px);
+}
+
+.bubble-logo {
+  width: 85%;
+  height: 85%;
+  object-fit: contain;
+  z-index: 2;
+  border-radius: 10%;
+}
+
+
+.platform-bubble.selected {
+  border: 3px solid #00bfff;
+  box-shadow: 0 0 15px rgba(0, 191, 255, 0.6);
+  transform: scale(1.05);
+}
+
+@keyframes floaty {
+  0%   { transform: translateY(0px); }
+  50%  { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.platform-bubble {
+  animation: floaty 4s ease-in-out infinite;
+}
+
+z
+.platform-bubble:nth-child(odd) {
+  animation-delay: 0.5s;
+}
+
+.platform-bubble:nth-child(even) {
+  animation-delay: 1.5s;
+} 
