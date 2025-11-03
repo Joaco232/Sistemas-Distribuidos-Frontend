@@ -1,5 +1,5 @@
 import Register from "./register/Register";
-import Login from "./login/login";
+import Login from "./login/Login";
 import MainPage from "./MainPage/mainpage";
 import {BrowserRouter as Router, Routes, Route, useLocation} from "react-router-dom";
 import ProfileEdit from "./editProfile/editProfile";
