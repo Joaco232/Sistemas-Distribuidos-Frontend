@@ -7,10 +7,18 @@ import InputField from "../components/InputField/InputField.jsx";
 import Header from "../components/Header/Header.jsx";
 import ButtonGlass from "../components/ButtonGlass/ButtonGlass.jsx";
 import Footer from "../components/Footer/Footer.jsx";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {registerUser} from "../services/apiUser.js";
 import { useNavigate } from "react-router-dom";
 import LoaderSpinner from "../components/LoaderSpinner/LoaderSpinner.jsx";
+import {
+    validateName,
+    validateEmail,
+    validatePassword,
+    validatePasswordMatch,
+    validateBirthDate,
+    mapBackendErrors
+} from "../services/validations.js";
 
 
 
@@ -28,6 +36,17 @@ export default function Register() {
         password2: ""
     });
 
+    const [errors, setErrors] = useState({
+        name: "",
+        birthDate: "",
+        email: "",
+        password1: "",
+        password2: ""
+    });
+
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
+
     function goToLogin() {
         navigate("/login");
     }
@@ -36,10 +55,29 @@ export default function Register() {
         navigate("/home");
     }
 
+    // Validación individual de campos usando las funciones de validations.js
+    const validateField = (name, value) => {
+        switch (name) {
+            case "name":
+                return validateName(value);
+            case "birthDate":
+                return validateBirthDate(value);
+            case "email":
+                return validateEmail(value);
+            case "password1":
+                return validatePassword(value);
+            case "password2":
+                return validatePasswordMatch(formData.password1, value);
+            default:
+                return "";
+        }
+    };
+
     function handleChange(e) {
         const { name, value } = e.target;
 
-        if (name === "name" && !/^[\p{L}\s]*$/u.test(value)) {
+        // Validación en tiempo real para el nombre
+        if (name === "name" && value && !/^[\p{L}\s]*$/u.test(value)) {
             return;
         }
 
@@ -47,36 +85,56 @@ export default function Register() {
             ...prev,
             [name]: value
         }));
+
+        // Limpiar error cuando el usuario empieza a escribir
+        if (errors[name]) {
+            setErrors(prev => ({
+                ...prev,
+                [name]: ""
+            }));
+        }
+
+        // Limpiar error general
+        if (error) {
+            setError("");
+        }
     }
 
-    const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false);
+    const handleBlur = (e) => {
+        const { name, value } = e.target;
+        const errorMsg = validateField(name, value);
+        
+        setErrors(prev => ({
+            ...prev,
+            [name]: errorMsg
+        }));
+    };
 
     async function handleSubmit(e) {
-
         e.preventDefault();
 
-        if (Object.values(formData).some(value => value.trim() === "")) {
+        // Validar todos los campos
+        const newErrors = {
+            name: validateField("name", formData.name),
+            birthDate: validateField("birthDate", formData.birthDate),
+            email: validateField("email", formData.email),
+            password1: validateField("password1", formData.password1),
+            password2: validateField("password2", formData.password2)
+        };
 
-            setError("Por favor, complete todos los campos.");
-            return;
-        }
+        setErrors(newErrors);
 
-        if (!formData.email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)) {
-            setError("Por favor, ingrese un email válido.");
-            return;
-        }
-        if (formData.password1.length < 8 && !formData.password1.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=\[{\]};:'",<.>/?\\|`~]).{8,}$/)) {
-            setError("La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial.");
-            return;
-        }
-        if (formData.password1 !== formData.password2) {
-            setError("Las contraseñas no coinciden.");
+        // Verificar si hay algún error
+        const hasErrors = Object.values(newErrors).some(error => error !== "");
+        
+        if (hasErrors) {
+            setError("Por favor, corrija los errores en el formulario.");
             return;
         }
 
         try {
             setLoading(true);
+            setError("");
 
             const userData = {
                 name: formData.name,
@@ -85,22 +143,29 @@ export default function Register() {
                 password: formData.password1
             };
 
-            const response = await registerUser(userData, 5000);
+            const response = await registerUser(userData, 10000);
 
             console.log("Usuario registrado:", response);
-
-            setError("");
 
             setLoading(false);
 
             setTimeout(() => navigate("/login"), 100);
 
-
         } catch (error) {
-
-            setError(error.message);
             setLoading(false);
-
+            
+            // Mapear errores del backend a campos específicos
+            const backendErrors = mapBackendErrors(error.message);
+            
+            setErrors(prev => ({
+                ...prev,
+                name: backendErrors.name || prev.name,
+                email: backendErrors.email || prev.email,
+                password1: backendErrors.password || prev.password1,
+                birthDate: backendErrors.birthDate || prev.birthDate
+            }));
+            
+            setError(backendErrors.general);
         }
     }
 
@@ -134,29 +199,70 @@ export default function Register() {
 
                     <form className="register-form" onSubmit={handleSubmit}>
 
-                        <InputField label="Nombre" name="name" className="text-input"
-                                    value={formData.name} type={"text"} onChange={handleChange}
-                                    maxLength={50}/>
+                        <InputField 
+                            label="Nombre" 
+                            name="name" 
+                            className="text-input"
+                            value={formData.name} 
+                            type={"text"} 
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            maxLength={50}
+                            error={errors.name}
+                        />
 
-                        <InputField label="Fecha de Nacimiento" name="birthDate" className="text-input"
-                                    value={formData.birthDate} type="date" onChange={handleChange}
-                                    max={today} placeholder="" />
+                        <InputField 
+                            label="Fecha de Nacimiento" 
+                            name="birthDate" 
+                            className="text-input"
+                            value={formData.birthDate} 
+                            type="date" 
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            max={today} 
+                            placeholder=""
+                            error={errors.birthDate}
+                        />
 
-                        <InputField label="Email" type="text" name="email" className="text-input"
-                                    value={formData.email} onChange={handleChange}
-                                    maxLength={254}/>
+                        <InputField 
+                            label="Email" 
+                            type="text" 
+                            name="email" 
+                            className="text-input"
+                            value={formData.email} 
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            maxLength={254}
+                            error={errors.email}
+                        />
 
-                        <InputField label="Contraseña" type="password" name="password1" className="text-input"
-                                    value={formData.password1} onChange={handleChange}
-                                    maxLength={254}/>
+                        <InputField 
+                            label="Contraseña" 
+                            type="password" 
+                            name="password1" 
+                            className="text-input"
+                            value={formData.password1} 
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            maxLength={254}
+                            error={errors.password1}
+                        />
 
-                        <InputField label="Repetir Contraseña" type="password" name="password2" className="text-input"
-                                    value={formData.password2} onChange={handleChange}
-                                    maxLength={254}/>
+                        <InputField 
+                            label="Repetir Contraseña" 
+                            type="password" 
+                            name="password2" 
+                            className="text-input"
+                            value={formData.password2} 
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            maxLength={254}
+                            error={errors.password2}
+                        />
 
                         {error && <p className="error-text">{error}</p>}
 
-                        <ButtonGlass type="submit" className="form-button" >Registrarse</ButtonGlass>
+                        <ButtonGlass type="submit" className="form-button">Registrarse</ButtonGlass>
 
                     </form>
 

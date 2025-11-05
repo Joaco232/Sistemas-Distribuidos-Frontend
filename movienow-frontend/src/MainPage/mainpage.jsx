@@ -1,7 +1,7 @@
 import React from "react";
 import ThreeDImageRing from "../components/ThreeDImageRing/ThreeDImageRing.jsx";
 
-import "./MainPage.css";
+import "./mainpage.css";
 
 export default function MainPage() {
   const posters = [
