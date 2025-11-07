@@ -9,6 +9,9 @@ README.md
 .env.*.local
 .vscode
 .idea
+*.log
+coverage
+.DS_Store
 *.md
 .DS_Store
 coverage

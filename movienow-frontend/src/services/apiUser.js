@@ -216,3 +216,4 @@ export async function getAllDBPlatforms(token) {
   const data = await response.json();
   return data;
 }
+

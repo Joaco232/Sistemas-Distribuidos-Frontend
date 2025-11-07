@@ -112,18 +112,21 @@ export function EditProfilePlatform() {
       </Header>
 
       <div className="edit-platform-container">
+
         <ContainerGlass className="edit-platform-glass">
           <p className="edit-platform-title">
             Seleccione Plataformas de Interes
           </p>
-          {error && <p className="error-message">{error}</p>}
+          
           {loading && (
-              <div className="loading-overlay">
-                  <div className="loader-container">
-                      <LoaderSpinner/>
-                  </div>
-              </div>
-          )}
+            <div className="loading-overlay-platform">
+                <div className="loader-container-platform">
+                    <LoaderSpinner/>
+                </div>
+            </div>
+          )}   
+
+          {error && <p className="error-message">{error}</p>}
           {!loading && (
             <div className="every-container-logos">
               {platforms.map((p) => (
@@ -143,7 +146,8 @@ export function EditProfilePlatform() {
           </ButtonGlass>
 
         </ContainerGlass>
-      </div>
+
+      </div>    
     </div>
   );
 }

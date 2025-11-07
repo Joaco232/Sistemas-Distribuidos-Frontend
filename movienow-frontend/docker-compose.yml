@@ -1,0 +1,19 @@
+services:
+  movienow-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # API URL that the browser will use to connect to the backend
+        # Use localhost:8080 since the browser runs on the host machine
+        VITE_API_BACK_URL: http://localhost:8080
+    container_name: movienow-frontend
+    ports:
+      - "3000:80"
+    restart: unless-stopped
+    networks:
+      - movienow-network
+
+networks:
+  movienow-network:
+    driver: bridge
