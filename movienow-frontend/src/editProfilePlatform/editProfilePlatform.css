@@ -110,3 +110,21 @@
     font-weight: 500;
     font-size: 22px;
 }
+
+
+
+.loading-overlay-platform{
+  display: flex;
+  justify-content: center; /* centra horizontalmente */
+  align-items: center;     /* centra verticalmente */
+  height: 50vh;  
+}
+
+.loader-container-platform{
+
+  display: flex;
+  justify-content: center; /* centra horizontalmente */
+  align-items: center;     /* centra verticalmente */
+  height: 50vh;
+  
+}
