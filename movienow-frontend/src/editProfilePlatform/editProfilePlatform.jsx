@@ -9,6 +9,8 @@ import LoaderSpinner from "../components/LoaderSpinner/LoaderSpinner";
 import PlatformBubble from "../components/ContainerLogo/containerLogo.jsx";
 import { getAllDBPlatforms } from "../services/apiUser.js";
 import ButtonGlass from "../components/ButtonGlass/ButtonGlass.jsx";
+import { changeUserPlatforms } from "../services/apiUser.js";
+ 
 
 
 
@@ -31,8 +33,7 @@ export function EditProfilePlatform() {
         setLoading(true);
         setError("");
 
-        const token = localStorage.getItem("jwt");
-        const data = await getAllDBPlatforms(token);
+        const data = await getAllDBPlatforms();
         setPlatforms(data);
 
       } catch (err) {
@@ -47,15 +48,16 @@ export function EditProfilePlatform() {
   }, []);
     
 
-  const togglePlatform = (name) => {
+  const togglePlatform = (id) => {
     setSelectedPlatforms((prev) => {
-      const alreadySelected = prev.includes(name);
+      const alreadySelected = prev.includes(id);
 
       if (alreadySelected) {
-        const newList = prev.filter((p) => p !== name);
+        const newList = prev.filter((p) => p !== id);
         return newList;
       } else {
-        const newList = [...prev, name];
+        const newList = [...prev, id];
+        console.log("Seleccionadas ahora:", newList);
         return newList;
       }
     });
@@ -70,31 +72,30 @@ export function EditProfilePlatform() {
   }
 
 
+async function handleSubmitChangePlatform(e) {
+  e.preventDefault();
 
-  async function handleSubmitChangePlatform(e) {
-    e.preventDefault();
-
-    if (selectedPlatforms.length === 0) {
-      setError("Por favor, seleccione al menos una plataforma.");
-      return;
-    }
-
-    try {
-      setLoading(true);
-      setError("");
-
-      const dataToSend = { platforms: selectedPlatforms };
-
-      const response = await changeUserPlatforms(dataToSend);
-      console.log("Plataformas actualizadas:", response);
-
-      navigate("/home");
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
+  if (selectedPlatforms.length === 0) {
+    setError("Por favor, seleccione al menos una plataforma.");
+    return;
   }
+
+  try {
+    setLoading(true);
+    setError("");
+
+    const dataToSend = { proversList: selectedPlatforms };
+
+    const response = await changeUserPlatforms(dataToSend);
+    goBackEditProfile()
+    
+  } catch (err) {
+    setError(err.message);
+  } finally {
+    setLoading(false);
+  }
+}
+
 
   return (
     <div className="edit-platform-page">
@@ -126,24 +127,27 @@ export function EditProfilePlatform() {
             </div>
           )}   
 
-          {error && <p className="error-message">{error}</p>}
-          {!loading && (
-            <div className="every-container-logos">
-              {platforms.map((p) => (
-                <PlatformBubble
-                  key={p.id}
-                  name={p.name}
-                  logo={p.logoUrl}
-                  selected={selectedPlatforms.includes(p.name)}
-                  onClick={() => togglePlatform(p.name)}
-                />
-              ))}
-            </div>            
-          )}
           
-          <ButtonGlass type="submit" className="form-button-platform">
+          <form className="form-edit-platforms" onSubmit={handleSubmitChangePlatform}>
+            {!loading && (
+              <div className="every-container-logos">
+                {platforms.map((p) => (
+                  <PlatformBubble
+                    key={p.id}
+                    name={p.name}
+                    logo={p.logoUrl}
+                    selected={selectedPlatforms.includes(p.id)}
+                    onClick={() => togglePlatform(p.id)}
+                  />
+                ))}
+              </div>            
+            )}
+
+            <ButtonGlass type="submit" className="form-button-platform">
               Aplicar
-          </ButtonGlass>
+            </ButtonGlass>
+            {error && <p className="error-message-edit-plat">{error}</p>}
+          </form>
 
         </ContainerGlass>
 

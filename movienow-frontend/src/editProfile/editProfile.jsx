@@ -31,6 +31,10 @@ export default function ProfileEdit() {
     navigate("/edit-profile-name");
   }
 
+  function goEditPlatforms() {
+    navigate("/edit-profile-platforms")
+  }
+
 
   useEffect(() => {
     getCurrentUser()
@@ -78,7 +82,7 @@ export default function ProfileEdit() {
               </div>
               <User2 className="edit-icon" />
             </li>
-            <li onClick={() => handleEdit("plataforms")}>
+            <li onClick={goEditPlatforms}>
               <div className="Plataformas">
                 <span className="field-name">Plataformas</span>
               </div>
