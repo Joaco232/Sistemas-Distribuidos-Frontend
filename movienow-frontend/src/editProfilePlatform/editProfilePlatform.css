@@ -98,7 +98,7 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: 0px;
-    margin-bottom: 45px;
+    margin-bottom: 20px;
     position: relative;
     width: 350px;
     height: 55px;
@@ -115,16 +115,34 @@
 
 .loading-overlay-platform{
   display: flex;
-  justify-content: center; /* centra horizontalmente */
-  align-items: center;     /* centra verticalmente */
+  justify-content: center; 
+  align-items: center;    
   height: 50vh;  
 }
 
 .loader-container-platform{
 
   display: flex;
-  justify-content: center; /* centra horizontalmente */
-  align-items: center;     /* centra verticalmente */
+  justify-content: center; 
+  align-items: center;     
   height: 50vh;
   
+}
+
+
+.form-edit-platforms {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  text-align: center;    
+}
+
+.error-message-edit-plat{
+    color: #ff4d4d;          /* rojo vivo */
+  text-align: center;      /* centrado horizontal */
+       /* lo sube un poco */
+  margin-bottom: 20px;     /* deja aire debajo del texto */
+  font-weight: 500;        /* un poco más notorio */
+  font-size: 1rem;         /* tamaño legible */
 }
