@@ -6,6 +6,7 @@ export async function registerUser(userData, timeout = 3000) {
   const timeoutId = setTimeout(() => controller.abort(), timeout);
 
   try {
+    // Public endpoint: POST /user
     const response = await fetch(`${BACK_URL}/user`, {
       method: "POST",
       headers: {
@@ -58,6 +59,7 @@ export async function registerUser(userData, timeout = 3000) {
  * Inicia sesión con email y contraseña
  */
 export async function loginUser(userLogin) {
+  // Public endpoint: POST /auth/login
   const response = await fetch(`${BACK_URL}/auth/login`, {
     method: "POST",
     headers: {
@@ -157,7 +159,7 @@ export async function getCurrentUser(timeout = 3000) {
 export async function changePassword(data) {
   const token = localStorage.getItem("token") || sessionStorage.getItem("token");
 
-  const response = await fetch(`${import.meta.env.VITE_API_BACK_URL}/user/password`, {
+  const response = await fetch(`${BACK_URL}/user/password`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -178,7 +180,7 @@ export async function changePassword(data) {
 export async function changeName(data) {
 
   const token = localStorage.getItem("token") || sessionStorage.getItem("token");
-  const response = await fetch(`${import.meta.env.VITE_API_BACK_URL}/user/name`, {
+  const response = await fetch(`${BACK_URL}/user/name`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -197,7 +199,7 @@ export async function changeName(data) {
 export async function changeUserPlatforms(data) {
   const token = localStorage.getItem("token") || sessionStorage.getItem("token");
 
-  const response = await fetch(`${import.meta.env.VITE_API_BACK_URL}/user/platforms`, {
+  const response = await fetch(`${BACK_URL}/user/platforms`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -219,12 +221,15 @@ export async function changeUserPlatforms(data) {
 
 export async function getAllDBPlatforms(token) {
   const controller = new AbortController();
-  const response = await fetch(`${import.meta.env.VITE_API_BACK_URL}/provider/all`, {
+  const headers = {
+    "Accept": "application/json",
+  };
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
+  const response = await fetch(`${BACK_URL}/provider/all`, {
     method: "GET",
-    headers: {
-      "Accept": "application/json",
-      "Authorization": `Bearer ${token}`,
-    },
+    headers,
     signal: controller.signal,
   });
 
