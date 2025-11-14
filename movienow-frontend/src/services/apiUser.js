@@ -192,5 +192,48 @@ export async function changeName(data) {
   }
 
   return await response.json();
-    
 }
+
+export async function changeUserPlatforms(data) {
+  const token = localStorage.getItem("token") || sessionStorage.getItem("token");
+
+  const response = await fetch(`${import.meta.env.VITE_API_BACK_URL}/user/platforms`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || "Error al actualizar las plataformas del usuario");
+  }
+
+  return await response.json();
+}
+
+
+
+
+export async function getAllDBPlatforms(token) {
+  const controller = new AbortController();
+  const response = await fetch(`${import.meta.env.VITE_API_BACK_URL}/provider/all`, {
+    method: "GET",
+    headers: {
+      "Accept": "application/json",
+      "Authorization": `Bearer ${token}`,
+    },
+    signal: controller.signal,
+  });
+
+  if (!response.ok) {
+    const message = `Error ${response.status}: ${response.statusText}`;
+    throw new Error(message);
+  }
+
+  const data = await response.json();
+  return data;
+}
+

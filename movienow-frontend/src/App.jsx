@@ -1,11 +1,13 @@
 import Register from "./register/Register";
 import Login from "./login/Login";
+
 import {BrowserRouter as Router, Routes, Route, useLocation} from "react-router-dom";
 import ProfileEdit from "./editProfile/editProfile";
 import Home from "./home/Home";
 import EditPassword from "./editPassword/editPassword";
 import EditProfileName from "./editProfileName/editProfileName";
 import {useEffect} from "react";
+import { EditProfilePlatform } from "./editProfilePlatform/editProfilePlatform";
 
 function TitleUpdater() {
     const location = useLocation();
@@ -41,6 +43,7 @@ function App() {
                 <Route path="/edit-profile" element={<ProfileEdit />} />
                 <Route path="/edit-password" element={<EditPassword />} />
                 <Route path="/edit-profile-name" element={<EditProfileName />} />
+                <Route path="/edit-profile-platforms" element={<EditProfilePlatform/>}/>
             </Routes>
         </Router>
     );

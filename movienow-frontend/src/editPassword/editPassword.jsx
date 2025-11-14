@@ -26,6 +26,7 @@ export default function EditPassword() {
     const [formData, setFormData] = useState({
         currentPassword: "",
         newPassword: "",
+        repeatNewPassword: ""
     });
 
     function handleChange(e) {
@@ -40,12 +41,18 @@ export default function EditPassword() {
     async function handleSubmitChangePassword(e) {
 
         e.preventDefault();
+
+        if (formData.newPassword !== formData.repeatNewPassword) {
+            setError("Las nuevas contraseñas no coinciden");
+            return;
+        }
         
         if (Object.values(formData).some(value => String(value).trim() === "")) {
 
             setError("Por favor, complete todos los campos.");
             return;
         }
+        
 
         try {
 
@@ -82,7 +89,6 @@ export default function EditPassword() {
 
             <div className="edit-password-body">
                 <ContainerGlass className="edit-password-container">
-                    <img className="logo-form" src={Imagotipo} alt="MovieNow logo"/>
                     <p className="edit-password-slogan">Cambio de contraseña</p>
 
                     <form className="edit-password-form" onSubmit={handleSubmitChangePassword}>
@@ -94,6 +100,10 @@ export default function EditPassword() {
                                     value={formData.newPassword} type="password" onChange={handleChange}
                                     maxLength={254}/>
 
+                        <InputField label="Repeat New Password" name="repeatNewPassword" className="text-input"
+                                    value={formData.repeatNewPassword} type="password" onChange={handleChange}
+                                    maxLength={254}/>
+
                         {error && <p className="error-text">{error}</p>}
                     
                         <ButtonGlass type="submit" className="form-button">
@@ -103,8 +113,9 @@ export default function EditPassword() {
                     
                 </ContainerGlass>
             </div>
+            <Footer />
 
-            {/*<Footer className="login-footer"></Footer> LO SACO PARECE QUEDAR MEJOR*/}
+            {/*<Footer className="login-footer"></Footer> JOACO PUTO*/}
         
         </div>
     );
