@@ -1,6 +1,5 @@
 import Register from "./register/Register";
-import Login from "./login/login";
-import MainPage from "./MainPage/mainpage";
+import Login from "./login/Login";
 import {BrowserRouter as Router, Routes, Route, useLocation} from "react-router-dom";
 import ProfileEdit from "./editProfile/editProfile";
 import Home from "./home/Home";
@@ -39,7 +38,6 @@ function App() {
                 <Route path="/signup" element={<Register />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/home" element={<Home />} />
-                <Route path="/main" element={<MainPage />} />
                 <Route path="/edit-profile" element={<ProfileEdit />} />
                 <Route path="/edit-password" element={<EditPassword />} />
                 <Route path="/edit-profile-name" element={<EditProfileName />} />

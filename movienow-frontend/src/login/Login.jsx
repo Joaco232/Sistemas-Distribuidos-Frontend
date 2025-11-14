@@ -7,7 +7,7 @@ import InputField from "../components/InputField/InputField.jsx";
 import Header from "../components/Header/Header.jsx";
 import ButtonGlass from "../components/ButtonGlass/ButtonGlass.jsx";
 import Footer from "../components/Footer/Footer.jsx";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import { useNavigate } from "react-router-dom";
 import RememberMeButton from "../components/RemeberMeButton/RememberMeButton.jsx"
 ;
