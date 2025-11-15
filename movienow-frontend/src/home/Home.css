@@ -1,6 +1,6 @@
 .home-page {
     position: relative;
-    min-height: 500vh;
+    min-height: 100vh;
     min-width: 100%;
     display: flex;
     flex-direction: column;
@@ -143,7 +143,6 @@
 
 
 .home-search-bar-div {
-    background-color: rgba(255, 255, 255, 0.06);
     min-height: calc(100vh - 60px);
     display: flex;
     flex-direction: column;
@@ -201,16 +200,51 @@
 
 .home-search-results-div {
     position: relative;
-    width: min(720px, 90vw);
+    width: min(820px, 90vw);
     margin-top: 24px; /* separación del search */
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    gap: 24px; /* separación entre cards */
     color: #fff;
     font-family: "DM Sans", sans-serif;
     font-size: 15px;
 }
 
+
+.next-page-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.page-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;   /* o el tamaño que quieras */
+    height: 44px;
+    padding: 0;
+}
+
+.page-info {
+    color: rgba(255, 255, 255, 0.9);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    white-space: nowrap;
+}
+
+.page-btn img {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    display: block;      /* ✔ elimina espacio fantasma */
+    margin: 0 auto;      /* ✔ fuerza centrado */
+    padding: 0;
+}
 
 @media (max-width: 1024px) {
     .home-search-bar-div {
@@ -238,4 +272,3 @@
         width: 94vw;
     }
 }
-

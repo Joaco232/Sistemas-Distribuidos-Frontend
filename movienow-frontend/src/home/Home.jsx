@@ -9,7 +9,10 @@ import { getCurrentUser } from "../services/apiUser.js";
 import SearchBar from "../components/SearchBar/SearchBar.jsx";
 import "./Home.css";
 import {fetchMoviesByName} from "../services/apiMovie.js";
-
+import MovieCard from "../components/MovieCard/MovieCard.jsx";
+import ButtonGlass from "../components/ButtonGlass/ButtonGlass.jsx";
+import ArrowLeft from "../assets/images/arrowpng.png";
+import ArrowRight from "../assets/images/arrowpng2.png";
 
 
 export default function Home() {
@@ -18,6 +21,9 @@ export default function Home() {
     const [menuOpen, setMenuOpen] = useState(false);
     const [user, setUser] = useState(null);
     const menuRef = useRef(null);
+    const [totalPages, setTotalPages] = useState(1);
+    const [page, setPage] = useState(1);
+    const [nameSearch, setNameSearch] = useState("");
 
     function goToLogin() {
         navigate("/login");
@@ -31,6 +37,13 @@ export default function Home() {
     function goToProfile() {
         navigate("/edit-profile");
         setMenuOpen(false); 
+    }
+
+    function logout() {
+        localStorage.removeItem("token");
+        sessionStorage.removeItem("token");
+        setUser(null);
+        setMenuOpen(false);
     }
 
     useEffect(() => {
@@ -57,10 +70,34 @@ export default function Home() {
         try {
             const data = await fetchMoviesByName(name);
             setMovies(data.results || []);
+            setTotalPages(data.total_pages)
+            setPage(data.page)
+            setNameSearch(name)
+
+
         } catch (error) {
             console.error("Error buscando películas:", error);
         }
     }
+
+    async function goToNextPage() {
+        if (page < totalPages) {
+            const data = await fetchMoviesByName(nameSearch, page + 1);
+            setMovies(data.results || []);
+            setPage(data.page);
+            setTotalPages(data.total_pages);
+        }
+    }
+
+    async function goToPreviousPage() {
+        if (page > 1) {
+            const data = await fetchMoviesByName(nameSearch, page - 1);
+            setMovies(data.results || []);
+            setPage(data.page);
+            setTotalPages(data.total_pages);
+        }
+    }
+
 
     return (
         <div className="home-page">
@@ -79,8 +116,7 @@ export default function Home() {
                         {user ? (
                             <>
                             <button onClick={goToProfile}>Editar perfil</button>
-                            <button>Mis Películas</button>
-                            <button>Cerrar sesión</button>
+                            <button onClick={logout}>Cerrar sesión</button>
                             </>
                         ) : (
                             <button onClick={goToLogin}>Iniciar sesión</button>
@@ -99,19 +135,47 @@ export default function Home() {
                     <SearchBar className="search-bar-home" placeholder="Buscar película..." onSearch={handleSearch} />
 
                     <div className="home-search-results-div">
-                        {movies.map((movie) => (
-                            <p key={movie.id}>{movie.title}</p>
-                        ))}
+                        {movies
+                            .filter((movie) => movie.backdrop_path)
+                            .map((movie) => (
+                                <MovieCard className={"home-card"}
+                                           key={movie.id}
+                                           title={movie.title}
+                                           backdrop_path={`https://image.tmdb.org/t/p/w780${movie.backdrop_path}`}
+                                           overview={movie.overview}
+                                           realease_date={movie.release_date}
+                                           adult={movie.adult}
+                                           original_language={movie.original_language}
+                                           id={movie.id}
+                                           original_title={movie.original_title}
+                                           genre={movie.genres}
+                                           platforms={movie.platforms}
+                                />
+                            ))}
+                    </div>
 
+                    <div className="next-page-buttons">
+                        <ButtonGlass
+                            className="page-btn"
+                            onClick={goToPreviousPage}
+                            disabled={page === 1}
+                        >
+                            <img src={ArrowLeft} alt="Arrow left round" />
+                        </ButtonGlass>
+
+                        <span className="page-info">Página {page} de {totalPages}</span>
+
+                        <ButtonGlass
+                            className="page-btn"
+                            onClick={goToNextPage}
+                            disabled={page === totalPages}
+                            round
+                        >
+                            <img src={ArrowRight} alt="Arrow right" className={"arrow-img"} />
+                        </ButtonGlass>
                     </div>
 
                 </div>
-
-
-
-
-
-
 
             </div>
 

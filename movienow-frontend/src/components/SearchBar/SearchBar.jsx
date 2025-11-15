@@ -25,7 +25,7 @@ const SearchBar = ({className = "", placeholder = "Buscar...", onSearch }) => {
                 className={`search-input ${className}-input`}
             />
 
-            <button type="submit" className={`button-glass search-button ${className}-button`}>
+            <button type="submit" className={`button-glass-s search-button ${className}-button`}>
                 <Search />
             </button>
 

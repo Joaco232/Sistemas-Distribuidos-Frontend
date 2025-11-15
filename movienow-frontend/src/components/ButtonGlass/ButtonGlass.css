@@ -1,13 +1,30 @@
 .button-glass {
     background: linear-gradient(to bottom, rgba(0, 77, 191, 0.27), rgba(0, 74, 255, 0.24));
     border-radius: 50px;
-    box-shadow: inset 4px 4px 10px rgba(39, 19, 97, 0.53), inset -4px -4px 10px rgba(157, 134, 221, 0.47), 0 0 15px rgba(0, 0, 0, 0.4);
+    box-shadow: inset 4px 4px 10px rgba(39, 19, 97, 0.53),
+    inset -4px -4px 10px rgba(157, 134, 221, 0.47),
+    0 0 15px rgba(0, 0, 0, 0.4);
     color: #ffffff;
     cursor: pointer;
     font-family: 'DM Sans', sans-serif;
     transition: all 0.05s ease-in-out;
     border: 2px solid rgb(60, 50, 83);
+
+    /* ✔ necesario para ::after */
+    position: relative;
+
+    /* ✔ hace que nada se salga */
+    overflow: hidden;
 }
+
+.button-glass:disabled {
+    opacity: 0.28;
+    cursor: not-allowed;
+    filter: grayscale(80%);
+    box-shadow: none !important;
+    background: rgba(120, 120, 120, 0.15);
+}
+
 
 .button-glass:hover {
     background-color: rgba(38, 71, 246, 0.19);
@@ -15,9 +32,10 @@
 
 .button-glass:focus {
     outline: none;
-    box-shadow: inset 4px 4px 10px rgba(39, 19, 97, 0.64), inset -4px -4px 10px rgba(157, 134, 221, 0.32), 0 0 15px rgba(0, 0, 0, 0.43);
+    box-shadow: inset 4px 4px 10px rgba(39, 19, 97, 0.64),
+    inset -4px -4px 10px rgba(157, 134, 221, 0.32),
+    0 0 15px rgba(0, 0, 0, 0.43);
     background: linear-gradient(to bottom, rgba(3, 55, 131, 0.27), rgba(2, 46, 156, 0.24));
-
 }
 
 .button-glass:active {
@@ -25,7 +43,11 @@
     transform: scale(0.96);
 }
 
+/* ✔ corregido: no sirve sin content */
 .button-glass::before {
+    content: "";
+    position: absolute;
+    inset: 0;
     z-index: -1;
     filter: blur(7px);
 }
@@ -35,5 +57,16 @@
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    box-shadow: inset 2px 2px 1px 0 rgba(136, 135, 135, 0.2), inset -1px -1px 1px 1px rgba(156, 149, 149, 0.19);
+    box-shadow: inset 2px 2px 1px 0 rgba(136, 135, 135, 0.2),
+    inset -1px -1px 1px 1px rgba(156, 149, 149, 0.19);
+
+    /* ✔ NO tapa el contenido */
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ✔ asegura que la imagen o texto esté adelante */
+.button-glass > * {
+    position: relative;
+    z-index: 1;
 }
