@@ -13,6 +13,8 @@ import MovieCard from "../components/MovieCard/MovieCard.jsx";
 import ButtonGlass from "../components/ButtonGlass/ButtonGlass.jsx";
 import ArrowLeft from "../assets/images/arrowpng.png";
 import ArrowRight from "../assets/images/arrowpng2.png";
+import LoadingOverlay from "../components/LoadingOverlay/LoadingOverlay.jsx";
+
 
 
 export default function Home() {
@@ -68,39 +70,68 @@ export default function Home() {
 
     async function handleSearch(name) {
         try {
+            setLoading(true);
             const data = await fetchMoviesByName(name);
             setMovies(data.results || []);
             setTotalPages(data.total_pages)
             setPage(data.page)
             setNameSearch(name)
+            window.scrollTo({ top: 0, behavior: "smooth" });
 
 
         } catch (error) {
             console.error("Error buscando películas:", error);
+
+        } finally {
+            setLoading(false);
         }
     }
 
     async function goToNextPage() {
         if (page < totalPages) {
-            const data = await fetchMoviesByName(nameSearch, page + 1);
-            setMovies(data.results || []);
-            setPage(data.page);
-            setTotalPages(data.total_pages);
+            try {
+                setLoading(true);
+                const data = await fetchMoviesByName(nameSearch, page + 1);
+                setMovies(data.results || []);
+                setPage(data.page);
+                setTotalPages(data.total_pages);
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+            finally {
+                setLoading(false);
+            }
         }
     }
 
     async function goToPreviousPage() {
         if (page > 1) {
-            const data = await fetchMoviesByName(nameSearch, page - 1);
-            setMovies(data.results || []);
-            setPage(data.page);
-            setTotalPages(data.total_pages);
+            try {
+                setLoading(true);
+                const data = await fetchMoviesByName(nameSearch, page - 1);
+                setMovies(data.results || []);
+                setPage(data.page);
+                setTotalPages(data.total_pages);
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+            finally {
+                setLoading(false);
+            }
         }
     }
 
 
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+    const [loading, setLoading] = useState(false);
+
+
     return (
         <div className="home-page">
+
+            {loading && <LoadingOverlay />}
 
             <Header className="register-header">
 
