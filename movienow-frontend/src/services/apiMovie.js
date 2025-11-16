@@ -1,7 +1,9 @@
 
-const BACK_URL = import.meta.env.VITE_API_BACK_URL  || "http://localhost:8080";
+const BACK_URL = import.meta.env.VITE_API_BACK_URL;
 
-export async function fetchMoviesByName(name, page = 1, language = "en-US", includeAdult = false) {
+
+
+export async function fetchMoviesByName(name, page = 1, language = "es-MX", includeAdult = false) {
 
     try {
         const params = new URLSearchParams({
