@@ -5,7 +5,8 @@ RUN npm ci
 COPY . .
 
 
-ENV VITE_API_BACK_URL=http://56.126.34.83:8080
+
+ENV VITE_API_BACK_URL=/api
 
 RUN npm run build
 
